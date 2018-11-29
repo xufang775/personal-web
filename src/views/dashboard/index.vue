@@ -1,14 +1,29 @@
 <template>
-  <div class="dashboard-container">
-    <div class="dashboard-text">name:{{ name }}</div>
-    <div class="dashboard-text">roles:<span v-for="role in roles" :key="role">{{ role }}</span></div>
+  <div>
+    1111
+    <my-table></my-table>
+    <br/>
+    <my-row></my-row>
+    <br/>
+    <my-td></my-td>
+
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import { MyTable } from '../../components/Table'
+import MyRow  from '../../components/Table/MyRow'
+import MyTd from "../../components/Table/MyTd";
+// import aa from '@/components/Table/MyTd'
+// import MyTd from "../../components/Table/MyTd";
 export default {
   name: 'Dashboard',
+  components:{
+    MyTd,
+    MyTable,
+    MyRow,
+  },
   computed: {
     ...mapGetters([
       'name',
