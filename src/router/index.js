@@ -66,7 +66,7 @@ export const constantRouterMap = [
       {
         path: 'user',
         name: 'user',
-        component: () => import('@/views/system-manage/SysUserList'),
+        component: () => import('@/views/system-manage/sys-user'),
         meta: { title: '用户管理', icon: 'table' }
       },
       {
