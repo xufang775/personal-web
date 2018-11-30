@@ -6,15 +6,16 @@
     <my-row></my-row>
     <br/>
     <my-td></my-td>
-
+    <month-cost-record-new></month-cost-record-new>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import { MyTable } from '../../components/Table'
-import MyRow  from '../../components/Table/MyRow'
-import MyTd from "../../components/Table/MyTd";
+import { MyTable } from '@/components/Table'
+import MyRow  from '@/components/Table/MyRow'
+import MyTd from "@/components/Table/MyTd";
+import MonthCostRecordNew from "./month-cost-record-new";
 // import aa from '@/components/Table/MyTd'
 // import MyTd from "../../components/Table/MyTd";
 export default {
@@ -23,6 +24,8 @@ export default {
     MyTd,
     MyTable,
     MyRow,
+    MonthCostRecordNew
+    //monthCostRecordNew
   },
   computed: {
     ...mapGetters([
