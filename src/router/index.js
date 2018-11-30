@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-/* Layout */
-import Layout from '../views/layout/Layout'
+
 // in development-env not use lazy-loading, because lazy-loading too many pages will cause webpack hot update too slow. so only in production use lazy-loading;
 // detail: https://panjiachen.github.io/vue-element-admin-site/#/lazy-loading
 
 Vue.use(Router)
+
+/* Layout */
+import Layout from '../views/layout/Layout'
 
 /**
  * hidden: true                   if `hidden:true` will not show in the sidebar(default is false)
@@ -30,7 +32,7 @@ export const constantRouterMap = [
     hidden: true,
     children: [{
       path: 'dashboard',
-      component: () => import('@/views/dashboard/index')
+      component: () => import('@/views/dashboard/month-cost-record-new')
     }]
   },
   {
@@ -43,13 +45,13 @@ export const constantRouterMap = [
       {
         path: 'item',
         name: 'item',
-        component: () => import('@/views/cost-manage/CostItemList'),
+        component: () => import('@/views/cost-manage/cost-item-list'),
         meta: { title: '消费项目', icon: 'table' }
       },
       {
         path: 'record',
         name: 'record',
-        component: () => import('@/views/cost-manage/cost-record/index'),
+        component: () => import('@/views/cost-manage/cost-record-list'),
         meta: { title: '消费记录', icon: 'tree' }
       }
     ]
