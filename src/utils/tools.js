@@ -6,7 +6,19 @@ export class ListQuery{
   }
 }
 export class BaseModel{
-  constructor({id}){
-
+  constructor({id,deleteFlag}){
+    this.id = id;
+    this.deleteFlag = deleteFlag;
   }
+}
+export class KeyValue{
+  constructor({key,value,other}){
+    this.key = key;
+    this.value = value;
+    this.other = other;
+  }
+}
+
+export const HttpCode ={
+  success:20000
 }

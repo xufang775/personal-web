@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-
+import url from './url'
 export function getPageList (params) {
   let data = { page: 1,rows: 5 };
   if(params['page']){
@@ -34,5 +34,11 @@ export function getList (params) {
     url: '/costItem/list',
     method: 'get',
     params
+  })
+}
+export function dic() {
+  return request({
+    url: url.costItem.dic,
+    method:'get'
   })
 }

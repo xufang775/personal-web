@@ -18,6 +18,14 @@
           model:{},
           rules:{},
         }
+    },
+    created(){
+      this.handleCreated();
+    },
+    methods:{
+      handleCreated(){
+        console.log('I am created,base');
+      }
     }
   }
 </script>

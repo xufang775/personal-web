@@ -51,7 +51,7 @@ export const constantRouterMap = [
       {
         path: 'record',
         name: 'record',
-        component: () => import('@/views/cost-manage/cost-record-list'),
+        component: () => import('@/views/cost-manage/cost-record'),
         meta: { title: '消费记录', icon: 'tree' }
       }
     ]

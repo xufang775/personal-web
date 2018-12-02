@@ -11,12 +11,29 @@ import '@/styles/index.scss' // global css
 import App from './App'
 import router from './router'
 import store from './store'
+import * as Tools from './utils/tools'
 
 import '@/icons' // icon
 import '@/permission' // permission control
+import '@/components/base'
+import moment from "moment";
+
+import * as filters from './filters' // global filters
+
+console.log(Tools);
 
 Vue.use(ElementUI, { locale })
 Vue.config.productionTip = false
+
+// register global utility filters.
+// Object.keys(filters).forEach(key => {
+//   Vue.filter(key, filters[key])
+// })
+
+//也可以用形参默认值
+Vue.filter('dateString',function(value,format='YYYY-MM-DD HH:mm:ss'){
+  return moment(value).format(format)
+})
 
 /* eslint-disable no-new */
 new Vue({

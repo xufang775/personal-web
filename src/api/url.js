@@ -1,5 +1,10 @@
 export default {
+  costItem:{
+    dic:'costItem/dic'
+  },
   costRecord:{
-    pageList: '/costRecord/pageList'
+    pageList: '/costRecord/pageListHasDic',
+    save: '/costRecord/save',
+    delete:'/costRecord/delete'
   }
 }
