@@ -31,9 +31,9 @@
                      @size-change="handleSizeChange"
                      @current-change="handleCurrentChange"
                      :current-page="listQuery.page"
-                     :page-sizes="[10,20,30,50]"
+                     :page-sizes="[15,20,30,50]"
                      :page-size="listQuery.rows"
-                     layout="total,prev, pager, next"
+                     layout="total,prev, pager, next,sizes"
                      :total="total">
       </el-pagination>
     </div>

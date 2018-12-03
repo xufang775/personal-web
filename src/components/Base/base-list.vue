@@ -22,7 +22,7 @@
     },
     methods:{
       handleCreated(){
-        console.log('I am created,base');
+        // console.log('I am created,base');
       }
     }
   }

@@ -1,6 +1,9 @@
 <template>
     <div class="app-container">
       <div class="filter-container">
+        <search @onSearch="onSearch"></search>
+      </div>
+      <div class="buttons-container">
         <el-button class="filter-item" type="primary" size="mini" @click="handleAdd">新增</el-button>
         <el-button class="filter-item" type="primary" size="mini" @click="handleAddMore">新增-批量</el-button>
       </div>
@@ -20,9 +23,11 @@
     import DAddEdit from "./d-add-edit";
     import List from "./list";
     import DAddEditMore from "./d-add-edit-more";
+    import Search from "./search";
 
     export default {
       components: {
+        Search,
         DAddEditMore,
         DAddEdit,List },
       name: "index",
@@ -33,6 +38,12 @@
         }
       },
       methods:{
+        onSearch(data){
+          this.$refs.list.listQuery.params = data;
+          console.log(this.$refs.list.listQuery);
+          this.$refs.list.getList()
+
+        },
         handleAdd(){
           this.$refs.dAddEdit.status='create';
           this.$refs.dAddEdit.visible=true;

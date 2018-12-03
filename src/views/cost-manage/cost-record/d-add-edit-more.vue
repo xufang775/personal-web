@@ -3,7 +3,7 @@
       <el-row>
         <el-form :rules="rules" ref="dataForm" :model="model" label-position="right" >
         <el-table size="mini" :data="data" border style="width: 100%" highlight-current-row>
-          <el-table-column type="index" width="30px"></el-table-column>
+          <el-table-column type="index" width="40px"></el-table-column>
           <el-table-column label="消费日期" width="150px">
             <template slot-scope="scope">
               <span v-if="scope.row.isSet">

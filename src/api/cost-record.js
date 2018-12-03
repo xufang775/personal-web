@@ -8,13 +8,17 @@ export function pageList (params) {
   //   data.rows = params['limit'];
   // }
 
-  return request.post(url.costRecord.pageList, {
-    data: params
+  // return request.post(url.costRecord.pageList, {
+  //   data: params
+  // })
+  return request({
+    url: url.costRecord.pageList,
+    method:'post',
+    data:params
   })
+
 }
 export function del(params) {
-  debugger;
-  console.log(params);
   return request({
     url: url.costRecord.delete,
     method:'post',

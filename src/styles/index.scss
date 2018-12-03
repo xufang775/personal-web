@@ -77,7 +77,6 @@ a:hover {
   padding: 20px;
 }
 
-
 .filter-container{
   padding-bottom: 10px;
   .filter-item {
@@ -85,6 +84,10 @@ a:hover {
     vertical-align: middle;
     margin-bottom: 10px;
   }
+}
+
+.buttons-container{
+  padding-bottom: 10px;
 }
 
 .pagination-container{ margin-top:10px; }
