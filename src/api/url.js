@@ -4,7 +4,8 @@ export default {
   },
   costRecord:{
     pageList: '/costRecord/pageListHasDic',
-    save: '/costRecord/save',
+    save: '/costRecord/insert',
+    saveList:'/costRecord/insertList',
     delete:'/costRecord/delete'
   }
 }

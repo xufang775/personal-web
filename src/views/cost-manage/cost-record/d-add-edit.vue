@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :title="textMap[status]" :visible.sync="pVisible" :before-close="hide" @open="open">
+  <el-dialog :title="titleMap[status]" :visible.sync="visible" :before-close="close" @open="open">
     <el-form :rules="rules" ref="dataForm" :model="model" label-position="right" label-width="100px" style="width:400px; margin-left: 50px;">
       <el-form-item label="消费日期" label-width="" prop="costDate">
         <el-date-picker type="date" placeholder="选择日期" v-model="model.costDate" ></el-date-picker>
@@ -14,10 +14,11 @@
       </el-form-item>
       <el-form-item label="备注" prop="remark">
         <el-input type="textarea" :autosize="{ minRows:4,maxRows:5 }" v-model="model.remark"></el-input>
+        {{title}}
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
-      <el-button @click="hide" size="mini">取消</el-button>
+      <el-button @click="close" size="mini">取消</el-button>
       <el-button v-if="status=='create'" type="primary" @click="createData" size="mini">确认</el-button>
       <el-button v-else type="primary" @click="updateData" size="mini">确认</el-button>
     </div>
@@ -56,7 +57,7 @@
               save(this.model)
                 .then(res=>{
                   if(res.success){
-                    this.hide();
+                    this.close();
                     this.$emit('isRefreshList',true);
                     // this.$refs['dataForm'].clearValidate();
                     this.model = {};
@@ -66,6 +67,7 @@
                       type: 'success',
                       duration: 2000
                     })
+
                   }
                 })
             }
@@ -78,10 +80,6 @@
           dic().then(res=>{
             this.dics.costItemId = res.data;
           })
-        },
-        hide(){
-          this.visible = false;
-          this.$emit('visibleChange',this.visible);
         }
       }
     }

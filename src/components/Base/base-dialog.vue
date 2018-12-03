@@ -11,9 +11,10 @@
           title:'',
           visible:this.pVisible,
           status:this.pStatus,
-          textMap: {
-            update: '修改',
-            create: '创建'
+          titleMap: {
+            'edit': '编辑',
+            'add': '新增',
+            'add-more':'新增-批量'
           },
           model:{},
           rules:{},
@@ -25,7 +26,16 @@
     methods:{
       handleCreated(){
         console.log('I am created,base');
-      }
+      },
+      close(){ // 弹框关闭前事件
+        this.visible = false;
+        this.$emit('visibleChange',this.visible);
+      },
+      open(){   // 弹框打开事件
+
+      },
+      addData(){},
+      editData(){}
     }
   }
 </script>

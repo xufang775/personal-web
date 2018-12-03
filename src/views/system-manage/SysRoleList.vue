@@ -4,7 +4,7 @@
      <!--<el-col span="24">-->
        <el-table size="mini" :data="master_user.data" border style="width: 100%" highlight-current-row>
          <el-table-column type="index"></el-table-column>
-         <el-table-column v-for="(v,i) in master_user.columns" :prop="v.field" :label="v.title" :width="v.width">
+         <el-table-column v-for="(v,i) in master_user.columns" :key="v.field" :prop="v.field" :label="v.title" :width="v.width">
            <template slot-scope="scope">
                 <span v-if="scope.row.isSet">
                     <el-input size="mini" placeholder="请输入内容" v-model="master_user.sel[v.field]">

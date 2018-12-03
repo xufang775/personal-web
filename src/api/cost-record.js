@@ -29,3 +29,10 @@ export function save(params) {
     data:params
   })
 }
+export function saveList(params) {
+  return request({
+    url: url.costRecord.saveList,
+    method:'post',
+    data:params
+  })
+}

@@ -91,6 +91,9 @@
             }
           })
         })
+      },
+      handleUpdate(row){
+        this.$emit('editRow',row);
       }
     }
   }
