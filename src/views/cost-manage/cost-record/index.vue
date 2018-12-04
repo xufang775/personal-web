@@ -3,6 +3,7 @@
       <div class="filter-container">
         <el-button class="filter-item" type="primary" size="mini" @click="handleAdd">新增</el-button>
         <el-button class="filter-item" type="primary" size="mini" @click="handleAddMore">新增-批量</el-button>
+        <el-button class="filter-item" type="primary" size="mini" @click="handleAddPoi">批量插入</el-button>
       </div>
       <div class="">
         <list ref="list" @editRow="handleEditRow"></list>
@@ -33,6 +34,10 @@
         }
       },
       methods:{
+        handleAddPoi(){
+          this.$refs.dAddEdit.status='create';
+          this.$refs.dAddEdit.visible=true;
+        },
         handleAdd(){
           this.$refs.dAddEdit.status='create';
           this.$refs.dAddEdit.visible=true;
