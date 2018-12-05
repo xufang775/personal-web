@@ -14,6 +14,7 @@
                   @isRefreshList="refreshList"
       ></d-add-edit>
       <d-add-edit-more ref="dAddEditMore" @postSuccess="refreshList"></d-add-edit-more>
+      <d-add-upload-poi ref="dUploadPoi"></d-add-upload-poi>
     </div>
 </template>
 
@@ -35,8 +36,8 @@
       },
       methods:{
         handleAddPoi(){
-          this.$refs.dAddEdit.status='create';
-          this.$refs.dAddEdit.visible=true;
+          this.$refs.dUploadPoi.status='create';
+          this.$refs.dUploadPoi.visible=true;
         },
         handleAdd(){
           this.$refs.dAddEdit.status='create';
