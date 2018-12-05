@@ -11,3 +11,25 @@ export class CostRecord extends BaseModel{
     this.deleteFlag = deleteFlag;
   }
 }
+
+export class CostRecordSearch {
+  constructor({
+                costDateStart,
+                costDateEnd,
+                costMonth,
+                costYear,
+                costPriceStart=undefined,
+                costPriceEnd=undefined,
+                costItemId,
+                remark
+              }){
+    this.costDateStart= costDateStart;
+    this.costDateEnd=costDateEnd;
+    this.costMonth=costMonth;
+    this.costYear=costYear;
+    this.costPriceStart=costPriceStart;
+    this.costPriceEnd=costPriceEnd;
+    this.costItemId=costItemId;
+    this.remark=remark
+  }
+}

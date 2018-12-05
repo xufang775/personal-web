@@ -6,7 +6,6 @@
       <div class="buttons-container">
         <el-button class="filter-item" type="primary" size="mini" @click="handleAdd">新增</el-button>
         <el-button class="filter-item" type="primary" size="mini" @click="handleAddMore">新增-批量</el-button>
-        <el-button class="filter-item" type="primary" size="mini" @click="handleAddPoi">批量插入</el-button>
       </div>
       <div class="">
         <list ref="list" @editRow="handleEditRow"></list>
@@ -17,7 +16,6 @@
                   @isRefreshList="refreshList"
       ></d-add-edit>
       <d-add-edit-more ref="dAddEditMore" @postSuccess="refreshList"></d-add-edit-more>
-      <d-add-upload-poi ref="dUploadPoi"></d-add-upload-poi>
     </div>
 </template>
 
@@ -45,10 +43,6 @@
           console.log(this.$refs.list.listQuery);
           this.$refs.list.getList()
 
-        },
-        handleAddPoi(){
-          this.$refs.dUploadPoi.status='create';
-          this.$refs.dUploadPoi.visible=true;
         },
         handleAdd(){
           this.$refs.dAddEdit.status='create';

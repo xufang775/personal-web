@@ -25,7 +25,7 @@
     },
     methods:{
       handleCreated(){
-        console.log('I am created,base');
+        // console.log('I am created,base');
       },
       close(){ // 弹框关闭前事件
         this.visible = false;

@@ -1,5 +1,9 @@
 <template>
     <div class="app-container">
+      <div class="header">
+        <el-date-picker type="month" placeholder="消费月份" v-model="currentDate" style="width: 140px;" @change="getList"></el-date-picker>
+        <!--{{currentMonth}}-->
+      </div>
       <table class="gridtable">
         <thead>
           <th>日期</th>
@@ -16,7 +20,7 @@
                 @keyup.enter="cellSave(col,colKey,row,index)"
                 @keyup.tab="cellSave(col,colKey,row,index)"
                 :style="{background:row.isWeekend ?'#d0e69c':''}">
-              <input :style="{background:row.isWeekend?'#d0e69c':''}" />
+              <input :style="{background:row.isWeekend?'#d0e69c':''}" :value="row[col.other]" >
             </td>
           </template>
 
@@ -49,6 +53,7 @@
 
 <script>
   import moment from "moment";
+  import {getMonthRecordForTable } from '@/api/cost-record'
   import {init } from '@/api/month-cost-record'
     export default {
       name: "month-cost-record-new",
@@ -101,25 +106,64 @@
         getCols(){
           init().then(res=>{
             this.columns = res.data.cols
+            console.log(this.columns);
           })
         },
         getList(){
           const monthInfo = this.getMonthInfo();
           const firstDate = monthInfo.firstDateNum;
           const lastDate = monthInfo.lastDateNum;
-          // debugger;
-          for(let i=firstDate; i<= lastDate; i++){
-            const date1 = moment().format('YYYY-MM-'+ ( i<10 ? '0' + i : i));
-            const currentDay = moment(date1).day();
-            const isToday = i === moment().date();
-            this.list.push({
-              date: i,
-              weekIndex: currentDay,
-              isWeekend: currentDay === 6 || currentDay ===0 ? true: false,
-              isToday:isToday,
-              currentDate:date1,
-            })
-          }
+          // this.list = [];
+          getMonthRecordForTable({costMonthStr:moment(this.currentDate).format("YYYY-MM")})
+            .then(res=>{
+              if(res.success){
+                this.list = [];
+                console.log(res.data);
+                let data = res.data;
+                // debugger;
+                for(let i=firstDate; i<= lastDate; i++){
+                  debugger;
+                  console.log(this.currentDate);
+                  const date1 =moment(this.currentDate).format('YYYY-MM-'+ ( i<10 ? '0' + i : i));
+                  const currentDay = moment(date1).day();
+                  const isToday = i === moment().date();
+                  let rowData = {
+                    date: i,
+                    weekIndex: currentDay,
+                    isWeekend: currentDay === 6 || currentDay ===0 ? true: false,
+                    isToday:isToday,
+                    currentDate:date1,
+                  };
+                  // console.log(date1);
+                  this.columns.forEach(col=>{
+
+                    let itemData = data.find(m=>moment(m.costDate).format('YYYY-MM-DD')==date1 && m.itemCode == col.other );
+
+                    // let itemData = data.find(m=>{
+                    //   // debugger
+                    //   console.log(moment(m.costDate).format('YYYY-MM-DD')+','+date1);
+                    //   // console.log(m.costDate==moment(date1));
+                    //   if(moment(m.costDate).format('YYYY-MM-DD')=='2018-12-05' && date1 =='2018-12-05' ){
+                    //     debugger
+                    //   }
+                    //   if(moment(m.costDate).format('YYYY-MM-DD')==date1 && m.itemCode == col.other ) {
+                    //     return true
+                    //   } else {
+                    //     return false
+                    //   }
+                    // });
+                    if(itemData){
+                      rowData[col.other] = itemData.costPrice;
+                    }
+                  });
+                  this.list.push(rowData)
+                  // console.log(this.list)
+                }
+                console.log(this.list)
+              }
+            });
+
+
         },
         getSummaries(param) {
           const { columns, data } = param;
@@ -168,6 +212,7 @@
 </script>
 
 <style scoped>
+  .header{ text-align: center;padding-bottom: 5px; }
 /* gridtable */
   table.gridtable {
      font-family: verdana,arial,sans-serif;

@@ -19,8 +19,8 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="close" size="mini">取消</el-button>
-      <el-button type="primary" @click="createData" size="mini">确认</el-button>
-      <!--<el-button v-else type="primary" @click="updateData" size="mini">确认</el-button>-->
+      <el-button v-if="status=='create'" type="primary" @click="createData" size="mini">确认</el-button>
+      <el-button v-else type="primary" @click="updateData" size="mini">确认</el-button>
     </div>
   </el-dialog>
 </template>
