@@ -34,7 +34,7 @@
       data(){
         return {
           addEditVisible:false,
-          addEditStatus:'add'
+          addEditStatus:'create'
         }
       },
       methods:{
@@ -45,12 +45,12 @@
 
         },
         handleAdd(){
-          this.$refs.dAddEdit.status='add';
+          this.$refs.dAddEdit.status='create';
           this.$refs.dAddEdit.visible=true;
         },
         handleEditRow(row){
           this.$refs.dAddEdit.model = Object.assign({},row);
-          this.$refs.dAddEdit.status='edit';
+          this.$refs.dAddEdit.status='update';
           this.$refs.dAddEdit.visible=true;
         },
         hideAddEdit(data){
