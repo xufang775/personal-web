@@ -11,32 +11,24 @@
       <div class="">
         <list ref="list" @editRow="handleEditRow"></list>
       </div>
-      <d-add-edit ref="dAddEdit" :pVisible="addEditVisible"
-                  :pStatus="addEditStatus"
-                  @visibleChange="hideAddEdit"
-                  @isRefreshList="refreshList"
-      ></d-add-edit>
+      <d-add-edit ref="dAddEdit" @visibleChange="hideAddEdit" @isRefreshList="refreshList"></d-add-edit>
       <d-add-edit-more ref="dAddEditMore" @postSuccess="refreshList"></d-add-edit-more>
       <d-add-upload-poi ref="dUploadPoi"></d-add-upload-poi>
     </div>
 </template>
 
 <script>
-    import DAddEdit from "./d-add-edit";
-    import List from "./list";
-    import DAddEditMore from "./d-add-edit-more";
-    import Search from "./search";
+  import { dAddEdit,dAddEditMore,dAddUploadPoi,list,search  } from './a-import'
 
     export default {
       components: {
-        Search,
-        DAddEditMore,
-        DAddEdit,List },
+        dAddEdit,dAddEditMore,dAddUploadPoi,list,search
+      },
       name: "index",
       data(){
         return {
           addEditVisible:false,
-          addEditStatus:'create'
+          addEditStatus:'add'
         }
       },
       methods:{
@@ -46,17 +38,16 @@
           this.$refs.list.getList()
 
         },
-        handleAddPoi(){
-          this.$refs.dUploadPoi.status='create';
-          this.$refs.dUploadPoi.visible=true;
-        },
         handleAdd(){
-          this.$refs.dAddEdit.status='create';
+          this.$refs.dAddEdit.status='add';
           this.$refs.dAddEdit.visible=true;
+        },
+        handleAddPoi(){
+          this.$refs.dUploadPoi.visible=true;
         },
         handleEditRow(row){
           this.$refs.dAddEdit.model = Object.assign({},row);
-          this.$refs.dAddEdit.status='update';
+          this.$refs.dAddEdit.status='edit';
           this.$refs.dAddEdit.visible=true;
         },
         hideAddEdit(data){
