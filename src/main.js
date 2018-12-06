@@ -15,25 +15,21 @@ import * as Tools from './utils/tools'
 
 import '@/icons' // icon
 import '@/permission' // permission control
-import '@/components/base'
+import base from '@/components/base/base'
 import moment from "moment";
 
-import * as filters from './filters' // global filters
-
-console.log(Tools);
 
 Vue.use(ElementUI, { locale })
 Vue.config.productionTip = false
 
+import * as filters from './filters' // global filters
 // register global utility filters.
-// Object.keys(filters).forEach(key => {
-//   Vue.filter(key, filters[key])
-// })
-
-//也可以用形参默认值
-Vue.filter('dateString',function(value,format='YYYY-MM-DD HH:mm:ss'){
-  return moment(value).format(format)
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
 })
+
+Vue.prototype.BASE = base;
+
 
 /* eslint-disable no-new */
 new Vue({

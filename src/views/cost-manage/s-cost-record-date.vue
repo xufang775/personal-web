@@ -1,17 +1,5 @@
 <template>
   <el-form :size="elementSize" :inline="true" :model="model" class="demo-form-inline">
-    <!--<el-form-item label="消费时间">-->
-      <!--<el-date-picker-->
-        <!--v-model="model.costDate"-->
-        <!--type="daterange"-->
-        <!--align="right"-->
-        <!--unlink-panels-->
-        <!--range-separator="至"-->
-        <!--start-placeholder="开始日期"-->
-        <!--end-placeholder="结束日期"-->
-        <!--:picker-options="pickerOptions2">-->
-      <!--</el-date-picker>-->
-    <!--</el-form-item>-->
     <el-form-item label="消费时间" required>
       <el-col :span="11">
         <el-form-item prop="costPriceStart">
@@ -62,10 +50,8 @@
 
 <script>
   import { BaseSearch,CostRecordSearch, dicCostItem, saveCostRecord, } from './a-import';
-  // import { dicCostItem  } from './url'
-  // import { BaseSearch } from '@/components/base'
     export default {
-      name: "search",
+      name: "s-cost-record-date",
       extends: BaseSearch,
       data(){
         return {

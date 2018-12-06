@@ -1,35 +1,26 @@
 <template>
     <div class="app-container">
       <div class="filter-container">
-        <search @onSearch="onSearch"></search>
+        <s-cost-record-date @onSearch="onSearch"></s-cost-record-date>
       </div>
       <div class="buttons-container">
         <el-button class="filter-item" type="primary" size="mini" @click="handleAdd">新增</el-button>
         <el-button class="filter-item" type="primary" size="mini" @click="handleAddMore">新增-批量</el-button>
       </div>
       <div class="">
-        <list ref="list" @editRow="handleEditRow"></list>
+        <l-cost-record-date ref="list" @editRow="handleEditRow"></l-cost-record-date>
       </div>
-      <d-add-edit ref="dAddEdit" :pVisible="addEditVisible"
-                  :pStatus="addEditStatus"
-                  @visibleChange="hideAddEdit"
-                  @isRefreshList="refreshList"
-      ></d-add-edit>
-      <d-add-edit-more ref="dAddEditMore" @postSuccess="refreshList"></d-add-edit-more>
+      <d-add-edit ref="dAddEdit" @visibleChange="hideAddEdit" @isRefreshList="refreshList"></d-add-edit>
+      <d-add-more ref="dAddEditMore" @postSuccess="refreshList"></d-add-more>
     </div>
 </template>
 
 <script>
-    import DAddEdit from "./d-add-edit";
-    import List from "./list";
-    import DAddEditMore from "./d-add-edit-more";
-    import Search from "./search";
+  import { dAddEdit,dAddMore,lCostRecordDate,sCostRecordDate  } from './a-import'
+
 
     export default {
-      components: {
-        Search,
-        DAddEditMore,
-        DAddEdit,List },
+      components: { dAddEdit,dAddMore,lCostRecordDate,sCostRecordDate  },
       name: "index",
       data(){
         return {

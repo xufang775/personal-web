@@ -1,7 +1,7 @@
 <template>
     <div class="app-container">
       <div class="filter-container">
-        <search @onSearch="onSearch"></search>
+        <s-cost-record @onSearch="onSearch"></s-cost-record>
       </div>
       <div class="buttons-container">
         <el-button class="filter-item" type="primary" size="mini" @click="handleAdd">新增</el-button>
@@ -9,20 +9,20 @@
         <el-button class="filter-item" type="primary" size="mini" @click="handleAddPoi">批量插入</el-button>
       </div>
       <div class="">
-        <list ref="list" @editRow="handleEditRow"></list>
+        <l-cost-record ref="list" @editRow="handleEditRow"></l-cost-record>
       </div>
       <d-add-edit ref="dAddEdit" @visibleChange="hideAddEdit" @isRefreshList="refreshList"></d-add-edit>
-      <d-add-edit-more ref="dAddEditMore" @postSuccess="refreshList"></d-add-edit-more>
+      <d-add-more ref="dAddMore" @postSuccess="refreshList"></d-add-more>
       <d-add-upload-poi ref="dUploadPoi"></d-add-upload-poi>
     </div>
 </template>
 
 <script>
-  import { dAddEdit,dAddEditMore,dAddUploadPoi,list,search  } from './a-import'
+  import { dAddEdit,dAddMore,dAddUploadPoi,lCostRecord,sCostRecord  } from './a-import'
 
     export default {
       components: {
-        dAddEdit,dAddEditMore,dAddUploadPoi,list,search
+        dAddEdit,dAddMore,dAddUploadPoi,lCostRecord,sCostRecord
       },
       name: "index",
       data(){
@@ -57,8 +57,8 @@
           this.$refs.list.getList();
         },
         handleAddMore(){
-          this.$refs.dAddEditMore.status = 'add-more';
-          this.$refs.dAddEditMore.visible = true;
+          this.$refs.dAddMore.status = 'add-more';
+          this.$refs.dAddMore.visible = true;
         }
       }
     }

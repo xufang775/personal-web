@@ -45,20 +45,26 @@ export const constantRouterMap = [
       {
         path: 'item',
         name: 'item',
-        component: () => import('@/views/cost-manage/cost-item-list'),
+        component: () => import('@/views/cost-manage/b-cost-item'),
         meta: { title: '消费项目', icon: 'table' }
       },
       {
         path: 'record',
         name: 'record',
-        component: () => import('@/views/cost-manage/cost-record'),
+        component: () => import('@/views/cost-manage/b-cost-record'),
         meta: { title: '消费记录', icon: 'tree' }
       },
       {
         path: 'record-date',
         name: 'record-date',
-        component: () => import('@/views/cost-manage/cost-record-date'),
+        component: () => import('@/views/cost-manage/b-cost-record-date'),
         meta: { title: '消费记录-日', icon: 'tree' }
+      },
+      {
+        path: 'record-month',
+        name: 'record-month',
+        component: () => import('@/views/cost-manage/b-cost-record-month'),
+        meta: { title: '消费记录-日历', icon: 'tree' }
       }
     ]
   },

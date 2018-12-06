@@ -9,7 +9,7 @@
       <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">查询</el-button>
     </div>
 
-    <el-table :key="tableKey" :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row>
+    <el-table size="mini" :key="tableKey" :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row>
       <el-table-column align="center" label="ID" width="95">
         <template slot-scope="scope">
           {{ (listQuery.page-1)*listQuery.limit + scope.$index+1 }}
@@ -82,7 +82,7 @@ const calendarTypeKeyValue = calendarTypeOptions.reduce((acc,cur) => {
 },{})
 
 export default {
-  name: 'cost-item-list',
+  name: 'b-cost-item',
   filters: {
     statusFilter (status) {
       const statusMap = {

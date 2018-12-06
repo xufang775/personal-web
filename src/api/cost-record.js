@@ -23,6 +23,14 @@ export function getMonthRecordForTable (params) {
   })
 }
 
+export function getListForMonth (params) {
+  return request({
+    url: url.costRecord.getListForMonth,
+    method:'post',
+    data:params
+  })
+}
+
 export function del(params) {
   return request({
     url: url.costRecord.delete,

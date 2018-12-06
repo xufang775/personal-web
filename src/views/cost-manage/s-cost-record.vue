@@ -65,7 +65,7 @@
   // import { dicCostItem  } from './url'
   // import { BaseSearch } from '@/components/base'
     export default {
-      name: "search",
+      name: "s-cost-record",
       extends: BaseSearch,
       data(){
         return {

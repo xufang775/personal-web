@@ -55,7 +55,7 @@
   import { BaseList, pageListByDate, delCostRecord } from './a-import';
 
   export default {
-    name: "list",
+    name: "l-cost-record-date",
     extends:BaseList,
     data(){
         return {

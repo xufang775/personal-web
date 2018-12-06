@@ -118,11 +118,14 @@
             .then(res=>{
               if(res.success){
                 this.list = [];
+
+
+
                 console.log(res.data);
                 let data = res.data;
                 // debugger;
                 for(let i=firstDate; i<= lastDate; i++){
-                  debugger;
+                  // debugger;
                   console.log(this.currentDate);
                   const date1 =moment(this.currentDate).format('YYYY-MM-'+ ( i<10 ? '0' + i : i));
                   const currentDay = moment(date1).day();

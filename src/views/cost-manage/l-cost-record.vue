@@ -12,7 +12,7 @@
       </el-table-column>
       <el-table-column prop="costDate" label="消费日期" width="180">
         <template slot-scope="scope">
-          {{scope.row.costDate | dateString('YYYY-MM-DD')}}
+          {{scope.row.costDate | parseTime('{y}-{m}-{d}')}}
           <span style="color:red;font-size: 5px;">{{weekenStr(scope.row.costDate)}}</span>
         </template>
       </el-table-column>
@@ -53,7 +53,7 @@
   // import { pageList,del } from '@/api/cost-record'
 
   export default {
-    name: "list",
+    name: "l-cost-record",
     extends:BaseList,
     data(){
         return {
@@ -115,6 +115,7 @@
       },
       tableRowClassName({row, rowIndex}) {
         if(row.costDate){
+          debugger;
           const costDateStr = moment(row.costDate).format('YYYY-MM-DD');
           const currDateStr = moment().format('YYYY-MM-DD');
           const isToday = costDateStr == currDateStr;

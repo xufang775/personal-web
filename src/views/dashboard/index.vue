@@ -1,12 +1,12 @@
 <template>
   <div>
-    1111
-    <my-table></my-table>
-    <br/>
-    <my-row></my-row>
-    <br/>
-    <my-td></my-td>
-    <month-cost-record-new></month-cost-record-new>
+    <!--1111-->
+    <!--<my-table></my-table>-->
+    <!--<br/>-->
+    <!--<my-row></my-row>-->
+    <!--<br/>-->
+    <!--<my-td></my-td>-->
+    <!--<month-cost-record-new></month-cost-record-new>-->
   </div>
 </template>
 

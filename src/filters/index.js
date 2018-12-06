@@ -1,6 +1,12 @@
-// set function parseTime,formatTime to filter
+// set function parseTime,formatTime to filterimport moment from "moment/moment";
+
+import moment from "moment";
+
 export { parseTime, formatTime } from '@/utils'
-import Vue from 'vue'
+
+export function dateString(value,format='YYYY-MM-DD HH:mm:ss') {
+  return moment(value).format(format)
+}
 
 function pluralize(time, label) {
   if (time === 1) {
