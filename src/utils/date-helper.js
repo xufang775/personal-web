@@ -21,6 +21,7 @@ export function month(currDay) {
     todayDate,
     todayDateStr,
     todayDay,
+    weekNum:todayDay,
     isToday,
     isWeekend,
     todayStr,

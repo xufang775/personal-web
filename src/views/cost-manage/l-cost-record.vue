@@ -115,7 +115,6 @@
       },
       tableRowClassName({row, rowIndex}) {
         if(row.costDate){
-          debugger;
           const costDateStr = moment(row.costDate).format('YYYY-MM-DD');
           const currDateStr = moment().format('YYYY-MM-DD');
           const isToday = costDateStr == currDateStr;

@@ -2,15 +2,15 @@
   <el-dialog :title="titleMap[status]" :visible.sync="visible" :before-close="close" @open="open">
     <el-form :rules="rules" ref="dataForm" :model="model" label-position="right" label-width="100px" style="width:400px; margin-left: 50px;">
       <el-form-item label="消费日期" label-width="" prop="costDate">
-        <el-date-picker type="date" placeholder="选择日期" v-model="model.costDate" ></el-date-picker>
+        <el-date-picker type="date" placeholder="选择日期" v-model="model.costDate" :disabled="elementDisabled.costDate[status]"></el-date-picker>
       </el-form-item>
       <el-form-item label="消费项目" prop="costItemId">
-        <el-select v-model="model.costItemId" placeholder="">
+        <el-select v-model="model.costItemId" placeholder="" :disabled="elementDisabled.costItemId[status]">
           <el-option v-for="item in dics.costItemId" :key="item.key" :label="item.value" :value="item.key"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="消费金额" prop="costPrice">
-        <el-input v-model.number="model.costPrice" autocomplete="off"></el-input>
+        <el-input v-model.number="model.costPrice" autocomplete="off" ></el-input>
       </el-form-item>
       <el-form-item label="备注" prop="remark">
         <el-input type="textarea" :autosize="{ minRows:4,maxRows:5 }" v-model="model.remark"></el-input>
@@ -44,6 +44,16 @@
             { required: true, message: '消费金额不能为空'},
             { type: 'number', message: '消费金额必须为数字值'}
           ]
+        },
+        elementDisabled:{
+          costDate:{
+            'add':false,
+            'add-month':true
+          },
+          costItemId:{
+            'add':false,
+            'add-month':true
+          }
         }
       }
     },
