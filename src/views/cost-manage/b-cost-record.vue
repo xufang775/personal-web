@@ -11,7 +11,7 @@
       <div class="">
         <l-cost-record ref="list" @editRow="handleEditRow"></l-cost-record>
       </div>
-      <d-add-edit ref="dAddEdit" @visibleChange="hideAddEdit" @isRefreshList="refreshList"></d-add-edit>
+      <d-add-edit ref="dAddEdit" @visibleChange="hideAddEdit" @postSuccess="refreshList"></d-add-edit>
       <d-add-more ref="dAddMore" @postSuccess="refreshList"></d-add-more>
       <d-add-upload-poi ref="dUploadPoi"></d-add-upload-poi>
     </div>

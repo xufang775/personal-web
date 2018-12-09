@@ -1,6 +1,6 @@
 <template>
-  <el-dialog :title="titleMap[status]" :visible.sync="visible" :before-close="close" @open="open">
-    <el-form :rules="rules" ref="dataForm" :model="model" label-position="right" label-width="100px" style="width:400px; margin-left: 50px;">
+  <el-dialog :title="titleMap[status]" :visible.sync="visible" :before-close="close" @open="open" width="500px">
+    <el-form :rules="rules" ref="dataForm" :model="model" label-position="right" label-width="120px" style="width:400px; ">
       <el-form-item label="消费日期" label-width="" prop="costDate">
         <el-date-picker type="date" placeholder="选择日期" v-model="model.costDate" :disabled="elementDisabled.costDate[status]"></el-date-picker>
       </el-form-item>
@@ -10,7 +10,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="消费金额" prop="costPrice">
-        <el-input v-model.number="model.costPrice" autocomplete="off" ></el-input>
+        <el-input v-model.number="model.costPrice" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="备注" prop="remark">
         <el-input type="textarea" :autosize="{ minRows:4,maxRows:5 }" v-model="model.remark"></el-input>
@@ -67,7 +67,7 @@
               .then(res=>{
                 if(res.success){
                   this.close();
-                  this.$emit('isRefreshList',true);
+                  this.$emit('postSuccess',true);
                   this.$refs['dataForm'].clearValidate();
                   this.model = new CostRecord({costDate:new Date});
                   this.$notify({

@@ -18,7 +18,7 @@
       <el-table-column prop="itemName" label="消费项目名称" width="110" align="center"></el-table-column>
       <el-table-column prop="enabled" label="激活" width="90">
         <template slot-scope="scope">
-          {{ scope.enabled }}
+          {{ scope.row.enabled?'是':'否' }}
         </template>
       </el-table-column>
       <el-table-column prop="sortNo" label="排序" width="100"></el-table-column>
@@ -48,6 +48,9 @@
       <el-form :rules="rules" ref="dataForm" :model="temp" label-position="right" label-width="100px" style="width:400px; margin-left: 50px;">
         <el-form-item label="项目名称" label-width="" prop="itemName">
           <el-input v-model="temp.itemName"></el-input>
+        </el-form-item>
+        <el-form-item label="排序" label-width="" prop="sortNo">
+          <el-input v-model="temp.sortNo"></el-input>
         </el-form-item>
         <el-form-item label="备注" prop="remark">
           <el-input type="textarea" :autosize="{ minRows:2,maxRows:4 }" v-model="temp.remark"></el-input>
@@ -116,6 +119,7 @@ export default {
         id: undefined,
         itemName:'',
         remark:'',
+        sortNo:'',
         enabled:true,
         timestamp: new Date(),
         title: '',

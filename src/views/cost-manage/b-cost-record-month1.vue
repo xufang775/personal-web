@@ -144,8 +144,8 @@
                 let sumRow =0;
                 let itemDatas =  data.filter(m=> moment(m.costDate).format('YYYY-MM-DD') == iCol.dateStr );
                 if(itemDatas.length>0){
-                  itemDatas.forEach(item=> sumRow +=item.costPrice);
-                  rowOne[iCol.field] = sumRow;
+                  itemDatas.forEach(item=> sumRow +=item.costPrice*100);
+                  rowOne[iCol.field] = sumRow/100;
                 }
               });
               this.rows.push(rowOne);

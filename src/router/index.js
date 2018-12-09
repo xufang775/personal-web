@@ -71,6 +71,12 @@ export const constantRouterMap = [
         name: 'record-month1',
         component: () => import('@/views/cost-manage/b-cost-record-month1'),
         meta: { title: '消费记录-日历1', icon: 'tree' }
+      },
+      {
+        path: 'record-month2',
+        name: 'record-month2',
+        component: () => import('@/views/cost-manage/b-cost-record-month2'),
+        meta: { title: '消费记录-日历2', icon: 'tree' }
       }
     ]
   },

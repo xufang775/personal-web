@@ -10,7 +10,7 @@
       <div class="">
         <l-cost-record-date ref="list" @editRow="handleEditRow"></l-cost-record-date>
       </div>
-      <d-add-edit ref="dAddEdit" @visibleChange="hideAddEdit" @isRefreshList="refreshList"></d-add-edit>
+      <d-add-edit ref="dAddEdit" @visibleChange="hideAddEdit" @postSuccess="refreshList"></d-add-edit>
       <d-add-more ref="dAddEditMore" @postSuccess="refreshList"></d-add-more>
     </div>
 </template>

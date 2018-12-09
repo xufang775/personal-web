@@ -9,6 +9,7 @@ export { default as lCostRecord } from './l-cost-record'
 export { default as sCostRecord } from './s-cost-record'
 export { default as lCostRecordDate } from './l-cost-record-date'
 export { default as sCostRecordDate } from './s-cost-record-date'
+export { default as zCostRecordPopover } from './z-cost-record-popover'
 //类
 export { CostRecord,CostRecordSearch } from '@/model/cost-record'
 

@@ -50,11 +50,11 @@
       </el-select>
     </el-form-item>
     <el-form-item label="备注">
-      <el-input v-model="model.remark" placeholder="备注"></el-input>
+      <el-input v-model="model.remark" placeholder="备注" ></el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="onSubmit">查询</el-button>
-      <el-button type="primary" @click="onRefresh">刷新</el-button>
+      <el-button type="primary" icon="el-icon-search" @click="onSubmit">查询</el-button>
+      <el-button type="primary" icon="el-icon-refresh" @click="onRefresh">刷新</el-button>
     </el-form-item>
   </el-form>
 
