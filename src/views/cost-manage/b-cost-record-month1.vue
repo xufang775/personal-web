@@ -1,8 +1,8 @@
 <template>
-  <div class="app-container">
-    <div class="header">
-      <el-date-picker type="month" placeholder="消费月份" v-model="costMonth" style="width: 140px;" ></el-date-picker>
-    </div>
+  <div>
+    <!--<div class="header">-->
+      <!--<el-date-picker type="month" placeholder="消费月份" v-model="costMonth" style="width: 140px;" ></el-date-picker>-->
+    <!--</div>-->
     <table class="my-table">
       <thead>
       <th>项目</th>
@@ -56,16 +56,6 @@
 
       </tr>
     </table>
-    <el-popover
-      placement="right"
-
-      title="标题"
-      width="200"
-      trigger="hover"
-      content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
-      <el-button slot="reference">hover 激活</el-button>
-    </el-popover>
-
     <d-add-edit ref="dAddEdit" ></d-add-edit>
   </div>
 </template>
@@ -75,7 +65,7 @@
   import moment from "moment";
   import {CostRecord} from "../../model/cost-record";
   export default {
-    name: "b-cost-record-month",
+    name: "b-cost-record-month1",
     components:{dAddEdit},
     data(){
       return {

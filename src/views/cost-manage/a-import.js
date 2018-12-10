@@ -8,8 +8,12 @@ export { default as dAddUploadPoi } from './d-add-upload-poi'
 export { default as lCostRecord } from './l-cost-record'
 export { default as sCostRecord } from './s-cost-record'
 export { default as lCostRecordDate } from './l-cost-record-date'
+export { default as lCostRecordYear } from './l-cost-record-year'
 export { default as sCostRecordDate } from './s-cost-record-date'
 export { default as zCostRecordPopover } from './z-cost-record-popover'
+
+export { default as bCostRecordMonth1 } from './b-cost-record-month1'
+export { default as bCostRecordMonth2 } from './b-cost-record-month2'
 //类
 export { CostRecord,CostRecordSearch } from '@/model/cost-record'
 
@@ -23,6 +27,7 @@ export {
   pageListByDate,
   getListForMonth,
   getMonthRecordForTable,
+  getMonthCensus,
   save as saveCostRecord,
   saveList as saveCostRecordList,
   del as delCostRecord

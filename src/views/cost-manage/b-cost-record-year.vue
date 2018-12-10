@@ -6,9 +6,9 @@
         <span>吃食：￥{{total.foodAll}}</span>
       </div>
       <div class="s-month-container" style="display: inline-block;">
-        <span @click="handleUpMonth">&lt;&lt;上月</span>
-        <el-date-picker size="mini" type="month" format="yyyy年MM月" placeholder="消费月份" v-model="costMonth"  style="width: 130px;" ></el-date-picker>
-        <span @click="handleNextMonth">下月&gt;&gt;</span>
+        <span @click="handleUpYear">&lt;&lt;上年</span>
+        <el-date-picker size="mini" type="year" format="yyyy年" placeholder="年份" v-model="costTime"  style="width: 100px;" ></el-date-picker>
+        <span @click="handleNextYear">下年&gt;&gt;</span>
       </div>
       <div class="s-buttons-container">
       <el-button size="mini" type="primary" icon="el-icon-refresh" @click="getData">刷新</el-button>
@@ -16,23 +16,23 @@
       </div>
     </div>
     <div>
-      <b-cost-record-month2 ref="month2" v-if="componentType=='month2'" :pCostMonth="costMonth" @totalChange="totalChange"></b-cost-record-month2>
-      <b-cost-record-month1 ref="month1" v-if="componentType=='month1'"></b-cost-record-month1>
+      <l-cost-record-year ref="year" v-if="componentType=='year'" :pCostTime="costTime" @totalChange="totalChange"></l-cost-record-year>
     </div>
   </div>
 </template>
 
 <script>
-  import {getListForMonth, month, bCostRecordMonth1,bCostRecordMonth2 } from './a-import'
+  import {getListForMonth, month, lCostRecordYear } from './a-import'
   import moment from "moment";
   export default {
     name: "b-cost-record-month",
-    components:{bCostRecordMonth1,bCostRecordMonth2 },
+    components:{ lCostRecordYear },
+
     data(){
       return {
         total:{sumAll:'',foodAll:''},
-        costMonth:moment(),
-        componentType:'month2',
+        costTime:moment(),
+        componentType:'year',
         // componentStatus:{
         //   'month1':''
         // }
@@ -42,8 +42,8 @@
 
     },
     watch:{
-      costMonth:function (newValue,oldValue) {
-        this.$refs[this.componentType].costMonth=newValue;
+      costTime:function (newValue,oldValue) {
+        this.$refs[this.componentType].costTime=newValue;
       }
     },
     methods:{
@@ -51,11 +51,11 @@
       handleChangeMonth(){
 
       },
-      handleUpMonth(){
-        this.costMonth = month(this.costMonth).first.subtract(1, 'days');
+      handleUpYear(){
+        this.costTime = month(this.costTime).yearFirstDate.subtract(1, 'days');
       },
-      handleNextMonth(){
-        this.costMonth = month(this.costMonth).last.add(1, 'days');
+      handleNextYear(){
+        this.costTime = month(this.costTime).yearLastDate.add(1, 'days');
       },
       handleComponentTypeChange(){
         this.componentType = this.componentType === 'month1'? 'month2':'month1';

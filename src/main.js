@@ -13,6 +13,7 @@ import router from './router'
 import store from './store'
 import * as Tools from './utils/tools'
 
+import i18n from './lang' // Internationalization
 import '@/icons' // icon
 import '@/permission' // permission control
 import base from '@/components/base/base'
@@ -23,6 +24,12 @@ Vue.use(ElementUI, { locale })
 Vue.config.productionTip = false
 
 import * as filters from './filters' // global filters
+
+Vue.use(Element, {
+  size: 'medium', // set element-ui default size
+  i18n: (key, value) => i18n.t(key, value)
+})
+
 // register global utility filters.
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])

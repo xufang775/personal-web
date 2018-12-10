@@ -31,6 +31,14 @@ export function getListForMonth (params) {
   })
 }
 
+export function getMonthCensus (params) {
+  return request({
+    url: url.costRecord.getMonthCensus,
+    method:'post',
+    data:params
+  })
+}
+
 export function del(params) {
   return request({
     url: url.costRecord.delete,

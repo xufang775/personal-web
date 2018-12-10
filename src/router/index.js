@@ -64,19 +64,31 @@ export const constantRouterMap = [
         path: 'record-month',
         name: 'record-month',
         component: () => import('@/views/cost-manage/b-cost-record-month'),
-        meta: { title: '消费记录-日历', icon: 'tree' }
+        meta: { title: '消费记录-月', icon: 'tree' }
       },
       {
-        path: 'record-month1',
-        name: 'record-month1',
-        component: () => import('@/views/cost-manage/b-cost-record-month1'),
-        meta: { title: '消费记录-日历1', icon: 'tree' }
+        path: 'record-year',
+        name: 'record-year',
+        component: () => import('@/views/cost-manage/b-cost-record-year'),
+        meta: { title: '消费记录-年', icon: 'tree' }
       },
+      // {
+      //   path: 'record-month1',
+      //   name: 'record-month1',
+      //   component: () => import('@/views/cost-manage/b-cost-record-month1'),
+      //   meta: { title: '消费记录-日历1', icon: 'tree' }
+      // },
+      // {
+      //   path: 'record-month2',
+      //   name: 'record-month2',
+      //   component: () => import('@/views/cost-manage/b-cost-record-month2'),
+      //   meta: { title: '消费记录-日历2', icon: 'tree' }
+      // },
       {
-        path: 'record-month2',
-        name: 'record-month2',
-        component: () => import('@/views/cost-manage/b-cost-record-month2'),
-        meta: { title: '消费记录-日历2', icon: 'tree' }
+        path: 'record-census',
+        name: 'record-census',
+        component: () => import('@/views/cost-manage/b-cost-record-census'),
+        meta: { title: '消费记录统计', icon: 'tree' }
       }
     ]
   },

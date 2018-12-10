@@ -1,17 +1,16 @@
 <template>
-  <div class="app-container">
-    <div class="header">
-      <div class="total-container">
-        <span>总消费：￥{{total.sumAll}}</span>
-      </div>
-      <div class="s-month-container" style="display: inline-block;">
-        <span @click="handleUpMonth">&lt;&lt;上月</span>
-        <el-date-picker size="mini" type="month" format="yyyy年MM月" placeholder="消费月份" v-model="costMonth"  style="width: 130px;" ></el-date-picker>
-        <span @click="handleNextMonth">下月&gt;&gt;</span>
-      </div>
-
-      <el-button size="mini" type="primary" icon="el-icon-refresh" @click="getData" style="float:right">刷新</el-button>
-    </div>
+  <div>
+    <!--<div class="header">-->
+      <!--<div class="total-container">-->
+        <!--<span>总消费：￥{{total.sumAll}}</span>-->
+      <!--</div>-->
+      <!--<div class="s-month-container" style="display: inline-block;">-->
+        <!--<span @click="handleUpMonth">&lt;&lt;上月</span>-->
+        <!--<el-date-picker size="mini" type="month" format="yyyy年MM月" placeholder="消费月份" v-model="costMonth"  style="width: 130px;" ></el-date-picker>-->
+        <!--<span @click="handleNextMonth">下月&gt;&gt;</span>-->
+      <!--</div>-->
+      <!--<el-button size="mini" type="primary" icon="el-icon-refresh" @click="getData" style="float:right">刷新</el-button>-->
+    <!--</div>-->
     <table class="my-table">
       <thead>
         <th>日期</th>
@@ -74,12 +73,13 @@
   import {dAddEdit, getListForMonth, month,zCostRecordPopover,CostRecord,saveCostRecord } from './a-import'
   import moment from "moment";
   export default {
-    name: "b-cost-record-month",
+    name: "b-cost-record-month2",
     components:{dAddEdit,zCostRecordPopover},
+    props:['pCostMonth'],
     data(){
       return {
         weekendBg:'#d0e69c',
-        total:{sumAll:''},
+        total:{sumAll:'',foodAll:''},
         columns:[],
         rows:[],
         costMonth:moment(),
@@ -89,14 +89,17 @@
       this.getData();
     },
     watch:{
-      costMonth:function (newValue,oldVaue) {
+      pCostMonth:function () {
+        this.getData();
+      },
+      costMonth:function (newValue,oldValue) {
         this.getData();
       }
     },
     methods:{
       getData(){
         let costMonthObj = month(this.costMonth);
-        let params = {costMonthStr: costMonthObj.monthStr};
+        let params = {costMonthStr: costMonthObj.monthStr,searchType:'month'};
 
         getListForMonth(params)
           .then(res=>{
@@ -135,6 +138,7 @@
               let rowSum = this.handleRowSum(data);
               this.rows.push(rowSum);
               console.log(this.rows);
+              this.$emit('totalChange',this.total);
             }
           });
       },
@@ -168,6 +172,7 @@
           dateStr:'sum',
           sum:sumAll/100
         };
+
         this.columns.forEach(iCol=>{
           let sumRow =0;
           let itemDatas =  data.filter(m=> m.itemCode == iCol.other  );
@@ -176,8 +181,17 @@
             rowOne[iCol.other] = sumRow/100;
           }
         });
-        return rowOne;
 
+        // 计算吃食合计
+        let sumFood = 0;
+        let filterValue=['早餐','中餐','晚餐','水果蔬菜','其他食物',];
+        let colFoods = this.columns.filter(m=>filterValue.indexOf(m.value)>=0);
+        colFoods.forEach(col=>{
+          sumFood += rowOne[col.other];
+        });
+        this.total.foodAll = sumFood;
+
+        return rowOne;
       },
       handleCol(data,iMonthObj){
         let row = {
@@ -189,6 +203,7 @@
         this.columns.forEach(iCol=>{
           if(iCol.other === 'sum') { // 列合计
             let sumCol =0;
+
             let itemDatas =  data.filter(m=> moment(m.costDate).format('YYYY-MM-DD') == iMonthObj.todayStr  );
             if(itemDatas.length>0){
               itemDatas.forEach(item=> sumCol +=item.costPrice*100);
@@ -213,7 +228,6 @@
           }
         });
         return row;
-
       },
       handleUpMonth(){
         this.costMonth = month(this.costMonth).first.subtract(1, 'days');
@@ -287,7 +301,9 @@ $tdSumbgColor:yellowgreen;   // “合计”行，列的背景颜色
 $headFontSize:14px;
   .header{
     text-align: center;padding-bottom: 5px;
-    .total-container{ color: red; display: inline-block; float: left; font-size: 16px;margin: 15px 0 0 10px;}
+    .total-container{ color: red; display: inline-block; float: left; font-size: 16px;margin: 15px 0 0 10px;display: flex;
+      span{ display: inline-block; flex: 1; }
+    }
   }
   .my-table{
     border:1px $borderColor;
@@ -328,17 +344,5 @@ $headFontSize:14px;
   right:0px;
   z-index: 99;
 }
-/*.detail-ico-weekend{*/
-  /*border-color: red red #d0e69c #d0e69c;*/
-/*}*/
-  /*.detail-ico{*/
-    /*width: 8px;*/
-    /*height: 8px;*/
-    /*background: red;*/
-    /*display: inline-block;*/
-    /*position: absolute;*/
-    /*top:0px;*/
-    /*right:0px;*/
-    /*z-index: 99;*/
-  /*}*/
+
 </style>

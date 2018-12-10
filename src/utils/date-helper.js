@@ -12,6 +12,9 @@ export function month(currDay) {
   let first = moment(moment(todayStr).format('YYYY-MM-01'));
   let last = moment(moment(todayStr).add(1,'M').format('YYYY-MM-01')).subtract(1,'d');
   let monthStr = today.format('YYYY-MM');
+  let yearStr = today.year();
+  let yearFirstDate = moment(yearStr+'-01-01');
+  let yearLastDate = moment(yearStr+'-12-31');
   const firstStr = first.format(dateFormat);
   const lastStr = last.format(dateFormat);
   const firstNum = first.date();
@@ -31,7 +34,10 @@ export function month(currDay) {
     lastNum,
     firstStr,
     lastStr,
-    monthStr
+    monthStr,
+    yearStr,
+    yearFirstDate,
+    yearLastDate
   }
 }
 //
