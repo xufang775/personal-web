@@ -4,9 +4,10 @@
         <s-cost-record @onSearch="onSearch"></s-cost-record>
       </div>
       <div class="buttons-container">
-        <el-button class="filter-item" type="primary" size="mini" @click="handleAdd">新增</el-button>
-        <el-button class="filter-item" type="primary" size="mini" @click="handleAddMore">新增-批量</el-button>
-        <el-button class="filter-item" type="primary" size="mini" @click="handleAddPoi">批量插入</el-button>
+        <el-button class="filter-item" type="primary" @click="handleAdd">新增</el-button>
+        <el-button class="filter-item" type="primary" @click="handleAddMore">新增-批量</el-button>
+        <el-button class="filter-item" type="primary" @click="handleAddPoi">批量插入</el-button>
+        <el-button class="filter-item" type="primary" @click="handleAdd1">新增11</el-button>
       </div>
       <div class="">
         <l-cost-record ref="list" @editRow="handleEditRow"></l-cost-record>
@@ -14,24 +15,37 @@
       <d-add-edit ref="dAddEdit" @visibleChange="hideAddEdit" @postSuccess="refreshList"></d-add-edit>
       <d-add-more ref="dAddMore" @postSuccess="refreshList"></d-add-more>
       <d-add-upload-poi ref="dUploadPoi"></d-add-upload-poi>
+      <d-cost-item :ref="aa.ref" :pDialog="aa" @close="aa.close()" @save="aa.yes"></d-cost-item>
     </div>
 </template>
 
 <script>
-  import { dAddEdit,dAddMore,dAddUploadPoi,lCostRecord,sCostRecord  } from './a-import'
+  import { dAddEdit,dAddMore,dAddUploadPoi,lCostRecord,sCostRecord,Dialog,dCostItem  } from './a-import'
 
     export default {
       components: {
-        dAddEdit,dAddMore,dAddUploadPoi,lCostRecord,sCostRecord
+        dAddEdit,dAddMore,dAddUploadPoi,lCostRecord,sCostRecord,dCostItem
       },
       name: "index",
       data(){
         return {
           addEditVisible:false,
-          addEditStatus:'add'
+          addEditStatus:'add',
+          aa:new Dialog({ref:'dCostItem'})
         }
       },
       methods:{
+        handleAdd1(){
+          let self=this;
+          this.aa.open({
+            title:'34343',
+            yes:(data)=>{
+              console.log('123');
+              console.log(data);
+              this.aa.close();
+            }
+          })
+        },
         onSearch(data){
           this.$refs.list.listQuery.params = data;
           console.log(this.$refs.list.listQuery);

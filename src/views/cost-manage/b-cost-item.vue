@@ -65,13 +65,13 @@
         <el-button v-else type="primary" @click="updateData">确认</el-button>
       </div>
     </el-dialog>
-
+    <d-cost-item :pVisible="visible" @visible-change="visible = false"></d-cost-item>
   </div>
 </template>
 
 <script>
-import {getPageList, getList, createCostItem, updateCostItem } from '@/api/cost-item'
-
+import {getPageList, getList, createCostItem, updateCostItem} from '@/api/cost-item'
+import { dCostItem  } from './a-import'
 
 const calendarTypeOptions = [
   { key: 'CN', display_name: 'China'},
@@ -86,6 +86,7 @@ const calendarTypeKeyValue = calendarTypeOptions.reduce((acc,cur) => {
 
 export default {
   name: 'b-cost-item',
+  components:{dCostItem},
   filters: {
     statusFilter (status) {
       const statusMap = {
@@ -98,6 +99,7 @@ export default {
   },
   data () {
     return {
+      visible:false,
       tableKey: 0,
       list: null,
       total: null,
@@ -169,12 +171,14 @@ export default {
       }
     },
     handleCreate(){
-      this.resetTemp();
-      this.dialogStatus = 'create';
-      this.dialogFormVisible = true;
-      this.$nextTick(()=>{
-        this.$refs['dataForm'].clearValidate()
-      })
+      this.visible=this.visible?false:true;
+
+      // this.resetTemp();
+      // this.dialogStatus = 'create';
+      // this.dialogFormVisible = true;
+      // this.$nextTick(()=>{
+      //   this.$refs['dataForm'].clearValidate()
+      // })
     },
     createData(){
       this.$refs['dataForm'].validate((valid)=>{

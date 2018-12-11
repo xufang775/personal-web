@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-table size="mini" :data="list" border style="width:100%" :row-class-name="tableRowClassName">
+    <el-table :data="list" border style="width:100%" :row-class-name="tableRowClassName">
       <el-table-column
         type="selection"
         width="55">

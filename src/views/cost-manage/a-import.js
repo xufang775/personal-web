@@ -1,7 +1,10 @@
 // 基本组件
-export { BaseDialog ,BaseSearch, BaseList } from '@/components/base'
+export { BaseDialog ,BaseSearch, BaseList,BaseDialogNew } from '@/components/base'
+
+export { Dialog } from '@/utils/tools'
 
 // 本模块自定义组件
+export { default as dCostItem } from './d-cost-item'
 export { default as dAddEdit } from './d-add-edit'
 export { default as dAddMore } from './d-add-more'
 export { default as dAddUploadPoi } from './d-add-upload-poi'

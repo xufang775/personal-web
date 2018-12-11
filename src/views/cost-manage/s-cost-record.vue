@@ -1,5 +1,5 @@
 <template>
-  <el-form :size="elementSize" :inline="true" :model="model" class="demo-form-inline">
+  <el-form :inline="true" :model="model" class="demo-form-inline">
     <!--<el-form-item label="消费时间">-->
       <!--<el-date-picker-->
         <!--v-model="model.costDate"-->
@@ -53,6 +53,7 @@
       <el-input v-model="model.remark" placeholder="备注" ></el-input>
     </el-form-item>
     <el-form-item>
+      <!--{{test}}-->
       <el-button type="primary" icon="el-icon-search" @click="onSubmit">查询</el-button>
       <el-button type="primary" icon="el-icon-refresh" @click="onRefresh">刷新</el-button>
     </el-form-item>
@@ -73,6 +74,11 @@
           dics:{
             costItemId:[]
           }
+        }
+      },
+      watch:{
+        test(val){
+
         }
       },
       methods: {
