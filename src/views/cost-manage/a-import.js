@@ -15,6 +15,7 @@ export { default as lCostRecordYear } from './l-cost-record-year'
 export { default as sCostRecordDate } from './s-cost-record-date'
 export { default as zCostRecordPopover } from './z-cost-record-popover'
 
+export { default as bCostRecordMonth } from './b-cost-record-month'
 export { default as bCostRecordMonth1 } from './b-cost-record-month1'
 export { default as bCostRecordMonth2 } from './b-cost-record-month2'
 //类

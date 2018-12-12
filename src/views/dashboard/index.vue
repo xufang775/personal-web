@@ -1,12 +1,6 @@
 <template>
   <div>
-    <!--1111-->
-    <!--<my-table></my-table>-->
-    <!--<br/>-->
-    <!--<my-row></my-row>-->
-    <!--<br/>-->
-    <!--<my-td></my-td>-->
-    <!--<month-cost-record-new></month-cost-record-new>-->
+    <b-cost-record-month></b-cost-record-month>
   </div>
 </template>
 
@@ -16,6 +10,7 @@ import { MyTable } from '@/components/Table'
 import MyRow  from '@/components/Table/MyRow'
 import MyTd from "@/components/Table/MyTd";
 import MonthCostRecordNew from "./month-cost-record-new";
+import { bCostRecordMonth,bCostRecordMonth2 } from "@/views/cost-manage/a-import"
 // import aa from '@/components/Table/MyTd'
 // import MyTd from "../../components/Table/MyTd";
 export default {
@@ -24,7 +19,9 @@ export default {
     MyTd,
     MyTable,
     MyRow,
-    MonthCostRecordNew
+    MonthCostRecordNew,
+    bCostRecordMonth,
+    bCostRecordMonth2
     //monthCostRecordNew
   },
   computed: {
