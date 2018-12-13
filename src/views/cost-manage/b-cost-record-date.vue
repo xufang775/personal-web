@@ -4,8 +4,8 @@
         <s-cost-record-date @onSearch="onSearch"></s-cost-record-date>
       </div>
       <div class="buttons-container">
-        <el-button class="filter-item" type="primary" size="mini" @click="handleAdd">新增</el-button>
-        <el-button class="filter-item" type="primary" size="mini" @click="handleAddMore">新增-批量</el-button>
+        <el-button class="filter-item" type="primary" @click="handleAdd">新增</el-button>
+        <el-button class="filter-item" type="primary" @click="handleAddMore">新增-批量</el-button>
       </div>
       <div class="">
         <l-cost-record-date ref="list" @editRow="handleEditRow"></l-cost-record-date>

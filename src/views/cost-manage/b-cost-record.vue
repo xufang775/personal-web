@@ -1,7 +1,7 @@
 <template>
     <div class="app-container">
       <div class="filter-container">
-        <s-cost-record @onSearch="onSearch"></s-cost-record>
+        <s-cost-record ref="search" @onSearch="onSearch"></s-cost-record>
       </div>
       <div class="buttons-container">
         <el-button class="filter-item" type="primary" @click="handleAdd">新增</el-button>
@@ -16,22 +16,24 @@
       <d-add-more ref="dAddMore" @postSuccess="refreshList"></d-add-more>
       <d-add-upload-poi ref="dUploadPoi"></d-add-upload-poi>
       <d-cost-item :ref="aa.ref" :pDialog="aa" @close="aa.close()" @save="aa.yes"></d-cost-item>
+      <d-cost-record :ref="dCR.ref" :pDialog="dCR" @close="dCR.close()" @saveSuccess="dCR.yes"></d-cost-record>
     </div>
 </template>
 
 <script>
-  import { dAddEdit,dAddMore,dAddUploadPoi,lCostRecord,sCostRecord,Dialog,dCostItem  } from './a-import'
+  import { CostRecord, dAddEdit,dAddMore,dAddUploadPoi,lCostRecord,sCostRecord,Dialog,dCostItem,dCostRecord } from './a-import'
 
     export default {
       components: {
-        dAddEdit,dAddMore,dAddUploadPoi,lCostRecord,sCostRecord,dCostItem
+        dAddEdit,dAddMore,dAddUploadPoi,lCostRecord,sCostRecord,dCostItem,dCostRecord
       },
       name: "index",
       data(){
         return {
           addEditVisible:false,
           addEditStatus:'add',
-          aa:new Dialog({ref:'dCostItem'})
+          aa:new Dialog({ref:'dCostItem'}),
+          dCR: new Dialog({ref:'dCostRecord'})
         }
       },
       methods:{
@@ -53,8 +55,37 @@
 
         },
         handleAdd(){
-          this.$refs.dAddEdit.status='add';
-          this.$refs.dAddEdit.visible=true;
+          let searchParams = this.$refs.search.model;
+          let costDate = new Date;
+          if(searchParams){
+            if(searchParams.costMonth){
+              costDate = searchParams.costMonth;
+            }
+            if(searchParams.costYear){
+              costDate = searchParams.costYear;
+            }
+            if(searchParams.costDateStart){
+              costDate = searchParams.costDateStart;
+            }
+            if(searchParams.costDateEnd){
+              costDate = searchParams.costDateEnd;
+            }
+          }
+
+
+          this.dCR.open({
+            title:'新增消费记录',
+            status:'add',
+            model: new CostRecord({costDate:costDate}),
+            yes:(res)=>{
+              this.$refs.list.getList()
+              console.log(4321);
+              this.dCR.close()
+            }
+          });
+
+          // this.$refs.dAddEdit.status='add';
+          // this.$refs.dAddEdit.visible=true;
         },
         handleAddPoi(){
           this.$refs.dUploadPoi.visible=true;

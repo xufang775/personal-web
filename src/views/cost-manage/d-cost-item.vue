@@ -1,6 +1,5 @@
 <template>
-  <el-dialog :visible.sync="pDialog.visible" :title="dialog.title" :before-close="handleClose" @open="handleOpen">
-    eeeee
+  <el-dialog :visible.sync="pDialog.visible" :title="title" :before-close="handleClose" @open="handleOpen">
     <div slot="footer" class="dialog-footer">
       <el-button @click="handleClose" >取消</el-button>
       <el-button type="primary" @click="handleSave" >确认</el-button>

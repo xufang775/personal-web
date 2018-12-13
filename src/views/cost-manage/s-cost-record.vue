@@ -1,17 +1,11 @@
 <template>
   <el-form :inline="true" :model="model" class="demo-form-inline">
-    <!--<el-form-item label="消费时间">-->
-      <!--<el-date-picker-->
-        <!--v-model="model.costDate"-->
-        <!--type="daterange"-->
-        <!--align="right"-->
-        <!--unlink-panels-->
-        <!--range-separator="至"-->
-        <!--start-placeholder="开始日期"-->
-        <!--end-placeholder="结束日期"-->
-        <!--:picker-options="pickerOptions2">-->
-      <!--</el-date-picker>-->
-    <!--</el-form-item>-->
+    <el-form-item label="消费年份">
+      <el-date-picker type="year" placeholder="消费年份" v-model="model.costYear" style="width: 140px;" @change="onSubmit"></el-date-picker>
+    </el-form-item>
+    <el-form-item label="消费月份">
+      <el-date-picker type="month" placeholder="消费月份" v-model="model.costMonth" style="width: 140px;" @change="onSubmit"></el-date-picker>
+    </el-form-item>
     <el-form-item label="消费时间" required>
       <el-col :span="11">
         <el-form-item prop="costPriceStart">
@@ -24,12 +18,6 @@
           <el-date-picker type="date" placeholder="选择日期" v-model="model.costDateEnd" style="width: 150px;"></el-date-picker>
         </el-form-item>
       </el-col>
-    </el-form-item>
-    <el-form-item label="消费月份">
-      <el-date-picker type="month" placeholder="消费月份" v-model="model.costMonth" style="width: 140px;"></el-date-picker>
-    </el-form-item>
-    <el-form-item label="消费年份">
-      <el-date-picker type="year" placeholder="消费年份" v-model="model.costYear" style="width: 140px;"></el-date-picker>
     </el-form-item>
     <el-form-item label="消费金额" required>
       <el-col :span="11">

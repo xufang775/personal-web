@@ -1,5 +1,5 @@
 <template>
-  <el-form :size="elementSize" :inline="true" :model="model" class="demo-form-inline">
+  <el-form :inline="true" :model="model" class="demo-form-inline">
     <el-form-item label="消费时间" required>
       <el-col :span="11">
         <el-form-item prop="costPriceStart">

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-table size="mini" :data="list" border :row-class-name="tableRowClassName" fit>
+    <el-table :data="list" border :row-class-name="tableRowClassName" fit>
       <el-table-column type="expand">
         <template slot-scope="scope">
           <el-table :data="scope.row.details" border>

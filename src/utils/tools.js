@@ -18,7 +18,7 @@ export class Dialog{
     ref='',
     visible=false,
     width=undefined,
-    data=new BaseModel(),
+    model=new BaseModel(),
     yes=function () {
 
     },
@@ -32,7 +32,7 @@ export class Dialog{
     this.ref = ref;
     this.visible = visible;
     this.width = width;
-    this.data = data;
+    this.model = model;
     this.yes = yes;
     this.no = no;
     this.result = {};
@@ -41,7 +41,7 @@ export class Dialog{
          title='',
          status='add',
          width=undefined,
-         data=new BaseModel(),
+         model=new BaseModel(),
          yes,
          no=function () {
 
@@ -54,8 +54,8 @@ export class Dialog{
       this.status = status;
     if(width)
       this.width = width;
-    if(data)
-      this.data = data;
+    if(model)
+      this.model = model;
     this.visible = true;
     if(yes){
       this.yes =  yes
