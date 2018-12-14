@@ -15,7 +15,8 @@
 </template>
 
 <script>
-  import {Dialog} from '@/utils/tools'
+  import { Dialog } from '@/utils/tools'
+  import { reqPost } from '@/api/common'
     export default {
       name: "bae-dialog-new",
       props:{
@@ -27,15 +28,15 @@
       },
       data(){
         return {
-          // dialog:{},
+          api:{
+            save:''
+          },
           ...this.pDialog
         }
       },
       watch: {
         pDialog: {
           handler: function (val, oldVal) {
-            // debugger;
-            // this.dialog = this.pDialog;
             Object.assign(this.$data,val)
           },
           deep: true
@@ -43,8 +44,20 @@
       },
       methods:{
         handleSave(){
-          this.result = {bb:'3333'};
-          this.$emit('save',this.result);
+          let self = this;
+          this.$refs.form.validate((valid)=>{
+            if(valid){
+              reqPost(this.api.save, self.model)
+                .then(res=>{
+                  if(res.success){
+                    let result = {success: true,data:self.model};
+                    this.$emit('saveSuccess',result);
+                    this.$refs.form.resetFields();
+                    this.msgSuccess();
+                  }
+                })
+            }
+          });
         },
         handleClose(){
           this.visible = false;

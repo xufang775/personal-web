@@ -1,10 +1,11 @@
 // 基本组件
-export { BaseDialog ,BaseSearch, BaseList,BaseDialogNew } from '@/components/base'
+export { BaseDialog ,BaseSearch, BaseList,BaseDialogNew,BaseIndex } from '@/components/base'
 
 export { Dialog } from '@/utils/tools'
 
 // 本模块自定义组件
 export { default as dCostItem } from './d-cost-item'
+export { default as lCostItem } from './l-cost-item'
 export { default as dAddEdit } from './d-add-edit'
 export { default as dCostRecord } from './d-cost-record'
 export { default as dAddMore } from './d-add-more'
@@ -21,12 +22,17 @@ export { default as bCostRecordMonth1 } from './b-cost-record-month1'
 export { default as bCostRecordMonth2 } from './b-cost-record-month2'
 //类
 export { CostRecord,CostRecordSearch } from '@/model/cost-record'
-
+export { CostItem } from '@/model/cost-item'
 // 工具类方法
 export { month } from '@/utils/date-helper'
 
 //请求方法
-export { dic as dicCostItem } from '@/api/cost-item';
+export {
+  dic as dicCostItem,
+  getPageList,
+  saveCostItem,
+  deleteCostItem
+} from '@/api/cost-item';
 export {
   pageList,
   pageListByDate,
@@ -38,3 +44,4 @@ export {
   del as delCostRecord
 } from '@/api/cost-record'
 
+export { api } from '@/api/common'

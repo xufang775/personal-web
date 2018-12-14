@@ -1,10 +1,7 @@
 <template>
   <div>
     <el-table :data="list" border style="width:100%" :row-class-name="tableRowClassName">
-      <el-table-column
-        type="selection"
-        width="55">
-      </el-table-column>
+      <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column align="center" label="ID" width="95">
         <template slot-scope="scope">
           {{ (listQuery.page-1)*listQuery.rows + scope.$index+1 }}
@@ -48,61 +45,20 @@
 
 <script>
   import moment from "moment";
-  import { BaseList, pageList, delCostRecord } from './a-import';
-  // import BaseList from '@/components/base/base-list'
-  // import { pageList,del } from '@/api/cost-record'
+  import { BaseList, api } from './a-import';
 
   export default {
     name: "l-cost-record",
     extends:BaseList,
     data(){
         return {
-
+          api:{
+            pageList:api.costRecord.getPageList,
+            delete:api.costRecord.delete,
+          }
         }
     },
     methods:{
-      handleCreated(){
-        this.getList();
-      },
-      getList(){
-        this.listLoading = true;
-        pageList(this.listQuery)
-          .then(res=>{
-            this.list = res.data.list;
-            this.total = res.data.total;
-            this.listLoading = false
-          })
-      },
-      handleSizeChange(val){
-        this.listQuery.rows = val;
-        this.getList();
-      },
-      handleCurrentChange(val){
-        this.listQuery.page = val;
-        this.getList();
-      },
-      handleDelete(row){
-        let ids = [row.id];
-        this.$confirm('确认要删除此记录吗？','提示',{
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(()=>{
-          delCostRecord(ids).then(res=>{
-            if(res.success){
-              this.getList();
-              this.$notify({
-                title: '成功',
-                message: '删除成功！',
-                type: 'success'
-              });
-            }
-          })
-        })
-      },
-      handleUpdate(row){
-        this.$emit('editRow',row);
-      },
       // 根据日期，为周六日打个标记
       weekenStr(date){
         const weekNum = moment(date).day();

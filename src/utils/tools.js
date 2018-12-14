@@ -32,6 +32,7 @@ export class Dialog{
     this.ref = ref;
     this.visible = visible;
     this.width = width;
+    this.labelWidth = '100px';
     this.model = model;
     this.yes = yes;
     this.no = no;
@@ -41,6 +42,7 @@ export class Dialog{
          title='',
          status='add',
          width=undefined,
+         labelWidth,
          model=new BaseModel(),
          yes,
          no=function () {
@@ -54,6 +56,9 @@ export class Dialog{
       this.status = status;
     if(width)
       this.width = width;
+    if(labelWidth){
+      this.labelWidth = labelWidth;
+    }
     if(model)
       this.model = model;
     this.visible = true;

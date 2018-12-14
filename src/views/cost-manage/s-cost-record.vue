@@ -41,7 +41,6 @@
       <el-input v-model="model.remark" placeholder="备注" ></el-input>
     </el-form-item>
     <el-form-item>
-      <!--{{test}}-->
       <el-button type="primary" icon="el-icon-search" @click="onSubmit">查询</el-button>
       <el-button type="primary" icon="el-icon-refresh" @click="onRefresh">刷新</el-button>
     </el-form-item>

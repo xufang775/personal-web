@@ -1,31 +1,26 @@
 import request from '@/utils/request'
 import url from './url'
 export function getPageList (params) {
-  let data = { page: 1,rows: 5 };
-  if(params['page']){
-    data.page = params['page'];
-  }
-  if(params['limit']){
-    data.rows = params['limit'];
-  }
-
-  return request.post('/costItem/pageList', {
-    data: data
+  return request({
+    url: url.costItem.getPageList,
+    method:'post',
+    data:params
   })
 }
 
-export function createCostItem(data) {
+export function saveCostItem(data) {
   return request({
-    url: '/costItem/create',
+    url: url.costItem.save,
     method:'post',
     data
   })
 }
-export function updateCostItem(data) {
+
+export function deleteCostItem(params) {
   return request({
-    url: '/costItem/update',
+    url: url.costItem.delete,
     method:'post',
-    data
+    data:params
   })
 }
 

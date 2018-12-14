@@ -22,7 +22,7 @@ export class CostRecordSearch {
                 costPriceEnd=undefined,
                 costItemId,
                 remark
-              }){
+              }={}){
     this.costDateStart= costDateStart;
     this.costDateEnd=costDateEnd;
     this.costMonth=costMonth;
