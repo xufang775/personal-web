@@ -16,7 +16,7 @@
       </div>
     </div>
     <div>
-      <b-cost-record-month2 ref="month2" v-if="componentType=='month2'" :pCostMonth="costMonth" @totalChange="totalChange"></b-cost-record-month2>
+      <b-cost-record-month2 ref="month2" :pCostMonth="costMonth" @totalChange="totalChange"></b-cost-record-month2>
       <b-cost-record-month1 ref="month1" v-if="componentType=='month1'"></b-cost-record-month1>
     </div>
   </div>
@@ -27,7 +27,7 @@
   import moment from "moment";
   export default {
     name: "b-cost-record-month",
-    components:{bCostRecordMonth1,bCostRecordMonth2 },
+    components:{ bCostRecordMonth1,bCostRecordMonth2 },
     data(){
       return {
         total:{sumAll:'',foodAll:''},

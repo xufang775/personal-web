@@ -78,7 +78,7 @@
             model: Object.assign({},row),
             yes:(res)=>{
               this.$refs.list.fetchData();
-              this.dAddEdit.close()
+              this.dCR.close()
             }
           });
         },

@@ -160,9 +160,9 @@
           let filterValue=['早餐','中餐','晚餐','水果蔬菜','其他食物',];
           let colFoods = this.columns.filter(m=>filterValue.indexOf(m.value)>=0);
           colFoods.forEach(col=>{
-            sumFood += rowOne[col.other];
+            sumFood += rowOne[col.other]*100;
           });
-          this.total.foodAll = sumFood;
+          this.total.foodAll = sumFood/100;
 
           return rowOne;
         },
