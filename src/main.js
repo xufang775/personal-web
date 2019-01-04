@@ -37,6 +37,10 @@ Object.keys(filters).forEach(key => {
 
 Vue.prototype.BASE = base;
 
+Vue.component('aa',{
+  template:`<div>123123</div>`
+});
+
 
 /* eslint-disable no-new */
 new Vue({

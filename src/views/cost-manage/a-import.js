@@ -6,6 +6,11 @@ export { Dialog } from '@/utils/tools'
 // 本模块自定义组件
 export { default as dCostItem } from './d-cost-item'
 export { default as lCostItem } from './l-cost-item'
+
+// 项目类型
+export { default as dCostType } from './d-cost-type'
+export { default as lCostType } from './l-cost-type'
+
 export { default as dAddEdit } from './d-add-edit'
 export { default as dCostRecord } from './d-cost-record'
 export { default as dAddMore } from './d-add-more'

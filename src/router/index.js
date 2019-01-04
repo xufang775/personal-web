@@ -49,6 +49,12 @@ export const constantRouterMap = [
         meta: { title: '消费项目', icon: 'table' }
       },
       {
+        path: 'type',
+        name: 'type',
+        component: () => import('@/views/cost-manage/b-cost-type'),
+        meta: { title: '消费类型', icon: 'table' }
+      },
+      {
         path: 'record',
         name: 'record',
         component: () => import('@/views/cost-manage/b-cost-record'),
@@ -102,13 +108,13 @@ export const constantRouterMap = [
       {
         path: 'user',
         name: 'user',
-        component: () => import('@/views/system-manage/sys-user'),
+        component: () => import('@/views/system-manage/b-sys-user'),
         meta: { title: '用户管理', icon: 'table' }
       },
       {
         path: 'role',
         name: 'role',
-        component: () => import('@/views/system-manage/SysRoleList'),
+        component: () => import('@/views/system-manage/b-sys-role'),
         meta: { title: '角色管理', icon: 'table' }
       }
     ]
