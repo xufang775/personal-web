@@ -55,9 +55,15 @@ export default {
   },
   costType:{
     dic:haddleZuul('money')+'/costType/dic',
+    cascader:haddleZuul('money')+'/costType/dic2',
     getPageList:haddleZuul('money')+ '/costType/getPageList',
     save:haddleZuul('money')+ '/costType/save',
     delete:haddleZuul('money')+'/costType/delete'
+  },
+  costTypeConfig:{
+    getPageList:haddleZuul('money')+ '/costTypeConfig/getPageList',
+    save:haddleZuul('money')+ '/costTypeConfig/save',
+    delete:haddleZuul('money')+'/costTypeConfig/delete'
   },
   costRecord:{
     getPageList:haddleZuul('money') + '/costRecord/pageListHasDic',

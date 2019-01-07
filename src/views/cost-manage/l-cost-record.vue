@@ -21,6 +21,8 @@
         </template>
       </el-table-column>
       <el-table-column prop="remark" label="备注"></el-table-column>
+      <el-table-column prop="costTypeCode" label="编码"></el-table-column>
+      <el-table-column prop="costTypeName" label="名称"></el-table-column>
       <el-table-column fixed="right" label="操作" width="100">
         <template slot-scope="scope">
           <!--<el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>-->

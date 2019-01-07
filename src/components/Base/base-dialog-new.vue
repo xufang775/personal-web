@@ -31,6 +31,7 @@
           api:{
             save:''
           },
+          dics:{},
           ...this.pDialog
         }
       },

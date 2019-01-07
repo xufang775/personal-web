@@ -51,7 +51,7 @@ export const constantRouterMap = [
       {
         path: 'type',
         name: 'type',
-        component: () => import('@/views/cost-manage/b-cost-type'),
+        component: () => import('@/views/cost-manage/cost-type/b-cost-type'),
         meta: { title: '消费类型', icon: 'table' }
       },
       {
