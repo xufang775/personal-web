@@ -36,7 +36,7 @@
           </div>
         </div>
         <div class="list-container">
-          <l-cost-type-config ref="listConfig" @editRow="handleEditRow"></l-cost-type-config>
+          <l-cost-type-config ref="listConfig" @editRow="handleTypeConfigEditRow"></l-cost-type-config>
         </div>
       </el-col>
     </el-row>
@@ -117,11 +117,11 @@ export default {
       this.dAddEditTypeConfig.open({
         title:'新增消费类型配置',
         status:'add',
-        width:'500px',
+        width:'700px',
         model: new CostTypeConfig(),
         yes:(res)=>{
-          this.$refs.list.fetchData();
-          this.dAddEdit.close()
+          this.$refs.listConfig.fetchData();
+          this.dAddEditTypeConfig.close()
         }
       });
     },
@@ -133,6 +133,17 @@ export default {
         yes:(res)=>{
           this.$refs.list.fetchData();
           this.dAddEdit.close()
+        }
+      });
+    },
+    handleTypeConfigEditRow(row){
+      this.dAddEditTypeConfig.open({
+        title:'编辑消费项目',
+        status:'edit',
+        model: row,
+        yes:(res)=>{
+          this.$refs.listConfig.fetchData();
+          this.dAddEditTypeConfig.close()
         }
       });
     },

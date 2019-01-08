@@ -54,11 +54,11 @@ export default {
     delete:haddleZuul('money')+'/costItem/delete'
   },
   costType:{
-    dic:haddleZuul('money')+'/costType/dic',
-    cascader:haddleZuul('money')+'/costType/dic2',
     getPageList:haddleZuul('money')+ '/costType/getPageList',
     save:haddleZuul('money')+ '/costType/save',
-    delete:haddleZuul('money')+'/costType/delete'
+    delete:haddleZuul('money')+'/costType/delete',
+    getKeyLabelList:haddleZuul('money')+'/costType/getKeyLabelList',
+    getCascader:haddleZuul('money')+'/costType/getCascader',
   },
   costTypeConfig:{
     getPageList:haddleZuul('money')+ '/costTypeConfig/getPageList',
@@ -70,6 +70,7 @@ export default {
     pageListByDate:haddleZuul('money') + '/costRecord/getPageListByDate',
     getMonthRecordForTable:haddleZuul('money') + '/costRecord/getMonthRecordForTable',
     getListForMonth:haddleZuul('money') + '/costRecord/getListForMonth',
+    getRecordTableData:haddleZuul('money') + '/costRecord/getRecordTableData',
     getMonthCensus:haddleZuul('money') + '/costRecord/getMonthCensus',
     save:haddleZuul('money') + '/costRecord/save',
     saveList:haddleZuul('money') + '/costRecord/insertList',

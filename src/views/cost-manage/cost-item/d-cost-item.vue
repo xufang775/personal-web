@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import {api, BaseDialogNew, saveCostItem } from './a-import'
+  import {api, BaseDialogNew, saveCostItem } from '../a-import'
     export default {
       name: "d-cost-item",
       extends: BaseDialogNew ,

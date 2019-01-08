@@ -7,8 +7,13 @@
       <el-form-item label="备注" prop="remark">
         <el-input type="textarea" :autosize="{ minRows:2,maxRows:4 }" v-model="model.remark"></el-input>
       </el-form-item>
-      <el-form-item label="" prop="type">
-        <el-checkbox v-model="model.enabled">激活</el-checkbox>
+      <el-form-item label="详情项目" prop="type">
+        <el-transfer v-model="model.detailsArr" :data="dic.typeData">
+          <span class="inline-block" :class="handleRender(option)" slot-scope="{ option }">
+            <span style="color:#fff;">{{ option.key }}</span>
+            <span style="margin-left: -22px;"> - {{ option.label }}</span>
+          </span>
+        </el-transfer>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -25,41 +30,37 @@
       extends: BaseDialogNew ,
       data(){
         return {
-          api:{ save:api.costType.save,cascader:api.costType.cascader },
-          rules:{
-            name:[{ required: true, message: '消费项目不能为空'}],
-            // type:[{ required: true, message: '消费日期不能为空'}],
-            sortNo:[
-              { required: true, message: '不能为空'},
-              // { type: 'number', message: '必须为数字值'}
-            ]
+          api:{
+            save:api.costTypeConfig.save,
+            getKeyLabelList:api.costType.getKeyLabelList
           },
-          dicCode:[]
+          rules:{
+            name:[{ required: true, message: '配置名称不能为空'}],
+          },
+          dic:{ typeData:[] }
         }
       },
-      // watch:{
-      //   model:function (val,oldval) {
-      //     debugger;
-      //     if(code){
-      //
-      //     }
-      //   },
-      //   deep:true
-      // },
       methods:{
         handleOpen(){
-          reqPost(this.api.cascader)
+          reqPost(this.api.getKeyLabelList)
             .then(res=>{
               if(res.success){
-                this.dicCode=res.data;
+                this.dic.typeData=res.data;
               }
-              console.log(this.dics['code']);
             });
         },
+        handleRender(row){
+          let res = {};
+          if(row.key.length == 2){
+            res['font-bold']=true;
+          }
+          return res;
+        }
       }
     }
 </script>
 
 <style scoped>
-
+  .inline-block{ display: inline-block;}
+  .font-bold{ font-weight: bold; }
 </style>

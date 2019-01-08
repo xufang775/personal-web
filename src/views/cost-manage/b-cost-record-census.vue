@@ -1,24 +1,35 @@
 <template>
     <div class="app-container">
       <el-row>
-        <el-col :span="12">
-          <el-table :data="yearList" border>
-            <el-table-column prop="costMonth" label="消费月份"></el-table-column>
-            <el-table-column prop="costPrice" label="消费金额"></el-table-column>
-          </el-table>
+        <!--<el-col :span="12">-->
+          <!--<el-table :data="yearList" border>-->
+            <!--<el-table-column prop="costMonth" label="消费月份"></el-table-column>-->
+            <!--<el-table-column prop="costPrice" label="消费金额"></el-table-column>-->
+          <!--</el-table>-->
+        <!--</el-col>-->
+        <el-col :span="24">
+          <z-current-date type="month"></z-current-date>
+          <z-cost-record-table :isShowHeaderSum="true" :headerOne="headerOne"></z-cost-record-table>
         </el-col>
-        <el-col :span="12"></el-col>
       </el-row>
     </div>
 </template>
 
 <script>
-  import { getMonthCensus } from './a-import'
+  import { getMonthCensus,zCurrentDate,zCostRecordTable,FieldLabel } from './a-import'
+  import ZCurrentDate from "./z-current-date";
+  import ZCostRecordTable from "./z-cost-record-table";
     export default {
+      components: {
+        ZCostRecordTable,
+        ZCurrentDate},
       name: "b-cost-record-census",
+      component:{zCurrentDate},
       data(){
         return {
-          yearList:[]
+          yearList:[],
+          // headerOne:new FieldLabel({ field:'costMonth',label:'月份' })
+          headerOne:new FieldLabel({ field:'date',label:'日期' })
         }
       },
       created(){

@@ -13,12 +13,13 @@ export class CostType extends BaseModel{
 }
 
 export class CostTypeConfig extends BaseModel{
-  constructor({id,configName,addUserId,addUserName,addDate,detail,remark,sortNo,enabled,deleteFlag}={id:'',deleteFlag:false,detail:[]}){
+  constructor({id,configName,addUserId,addUserName,addDate,detail,detailsArr,remark,sortNo,enabled,deleteFlag}={id:'',deleteFlag:false,detailsArr:[]}){
     super(id,deleteFlag);
     this.configName = configName;
     this.addUserId = addUserId;
     this.addUserName = addUserName;
     this.detail = detail;
+    this.detailsArr = detailsArr;
     this.addDate = addDate;
     this.sortNo = sortNo;
     this.remark = remark;

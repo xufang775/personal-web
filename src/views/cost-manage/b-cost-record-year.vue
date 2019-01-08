@@ -7,7 +7,7 @@
       </div>
       <div class="s-month-container" style="display: inline-block;">
         <span @click="handleUpYear">&lt;&lt;上年</span>
-        <el-date-picker size="mini" type="year" format="yyyy年" placeholder="年份" v-model="costTime"  style="width: 100px;" ></el-date-picker>
+        <el-date-picker type="year" format="yyyy年" placeholder="年份" v-model="costTime"  style="width: 100px;" ></el-date-picker>
         <span @click="handleNextYear">下年&gt;&gt;</span>
       </div>
       <div class="s-buttons-container">

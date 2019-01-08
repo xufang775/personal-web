@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { dCostItem,lCostItem ,Dialog,CostItem,BaseIndex } from './a-import'
+import { dCostItem,lCostItem ,Dialog,CostItem,BaseIndex } from '../a-import'
 
 export default {
   name: 'b-cost-item',

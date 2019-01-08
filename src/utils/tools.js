@@ -112,6 +112,14 @@ export class KeyValue{
     this.other = other;
   }
 }
+export class FieldLabel{
+  constructor({field,value,label,other}={}){
+    this.field = field;
+    this.value = value;
+    this.label = label;
+    this.other = other;
+  }
+}
 
 export const HttpCode ={
   success:20000

@@ -4,15 +4,8 @@
         <el-button class="filter-item" type="primary" @click="handleAdd">新增</el-button>
       </div>
       <div class="list-container">
-        <!--<el-table :data="listData">-->
-          <!--<el-table-column align="center" label="ID" width="95">-->
-            <!--<template slot-scope="scope">-->
-              <!--{{ (listQuery.page-1)*listQuery.rows + scope.$index+1 }}-->
-            <!--</template>-->
-          <!--</el-table-column>-->
-          <!--<el-table-column prop="roleCode" label="角色编码"></el-table-column>-->
-          <!--<el-table-column prop="roleName" label="角色名称"></el-table-column>-->
-        <!--</el-table>-->
+        <el-transfer v-model="value1" :data="data"></el-transfer>
+        <div>{{value1}}</div>
       </div>
     </div>
 </template>
@@ -21,11 +14,22 @@
   import { ListQuery } from './a-import'
     export default {
       name: "b-sys-role",
-      data(){
-          return {
-            listData:[],
-            listQuery:new ListQuery({}),
+      data() {
+        const generateData = _ => {
+          const data = [];
+          for (let i = 1; i <= 15; i++) {
+            data.push({
+              key: i,
+              label: `备选项 ${ i }`,
+              disabled: i % 4 === 0
+            });
           }
+          return data;
+        };
+        return {
+          data: generateData(),
+          value1: [1, 4]
+        };
       },
       methods:{
         handleAdd(){

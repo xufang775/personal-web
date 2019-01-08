@@ -44,7 +44,7 @@
 </template>
 
 <script>
-  import { api,BaseList } from './a-import'
+  import { api,BaseList } from '../a-import'
   export default {
     name: "l-cost-item",
     extends:BaseList,

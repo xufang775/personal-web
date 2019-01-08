@@ -4,8 +4,8 @@ export { BaseDialog ,BaseSearch, BaseList,BaseDialogNew,BaseIndex } from '@/comp
 export { Dialog } from '@/utils/tools'
 
 // 本模块自定义组件
-export { default as dCostItem } from './d-cost-item'
-export { default as lCostItem } from './l-cost-item'
+export { default as dCostItem } from './cost-item/d-cost-item'
+export { default as lCostItem } from './cost-item/l-cost-item'
 
 // 项目类型
 export { default as dCostType } from './cost-type/d-cost-type'
@@ -27,13 +27,16 @@ export { default as zCostRecordPopover } from './z-cost-record-popover'
 export { default as bCostRecordMonth } from './b-cost-record-month'
 export { default as bCostRecordMonth1 } from './b-cost-record-month1'
 export { default as bCostRecordMonth2 } from './b-cost-record-month2'
+
+export { default as zCurrentDate } from './z-current-date'
+export { default as zCostRecordTable } from './z-cost-record-table'
 //类
 export { CostRecord,CostRecordSearch } from '@/model/cost-record'
 export { CostItem } from '@/model/cost-item'
 export { CostType, CostTypeConfig } from '@/model/cost-type'
 // 工具类方法
 export { month } from '@/utils/date-helper'
-
+export { FieldLabel } from '@/utils/tools';
 //请求方法
 export {
   dic as dicCostItem,

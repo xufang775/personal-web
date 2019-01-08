@@ -45,7 +45,7 @@ export const constantRouterMap = [
       {
         path: 'item',
         name: 'item',
-        component: () => import('@/views/cost-manage/b-cost-item'),
+        component: () => import('@/views/cost-manage/cost-item/b-cost-item'),
         meta: { title: '消费项目', icon: 'table' }
       },
       {

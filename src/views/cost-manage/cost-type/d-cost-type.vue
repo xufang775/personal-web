@@ -59,7 +59,7 @@
       // },
       methods:{
         handleOpen(){
-          reqPost(this.api.cascader)
+          reqPost(this.api.getCascader)
             .then(res=>{
               if(res.success){
                 this.dicCode=res.data;
