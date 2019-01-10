@@ -13,7 +13,7 @@
           <span style="color:red;font-size: 5px;">{{weekenStr(scope.row.costDate)}}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="costItemName" label="消费项目" width="180"></el-table-column>
+      <el-table-column prop="costTypeName" label="消费项目" width="180"></el-table-column>
       <el-table-column prop="costPrice" label="消费金额" width="180">
         <template slot-scope="scope">
           <span style="font-weight: bold;">￥</span>
@@ -21,8 +21,8 @@
         </template>
       </el-table-column>
       <el-table-column prop="remark" label="备注"></el-table-column>
-      <el-table-column prop="costTypeCode" label="编码"></el-table-column>
-      <el-table-column prop="costTypeName" label="名称"></el-table-column>
+      <!--<el-table-column prop="costTypeCode" label="编码"></el-table-column>-->
+      <!--<el-table-column prop="costTypeName" label="名称"></el-table-column>-->
       <el-table-column fixed="right" label="操作" width="100">
         <template slot-scope="scope">
           <!--<el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>-->

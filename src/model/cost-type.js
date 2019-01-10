@@ -1,6 +1,6 @@
 import {BaseModel} from "../utils/tools";
 export class CostType extends BaseModel{
-  constructor({id,name,parentCode,code,type,remark,sortNo,enabled,deleteFlag}={id:'',deleteFlag:false}){
+  constructor({id,name,parentCode,code,type,remark,sortNo,enabled,deleteFlag}={id:'',enabled:true,deleteFlag:false}){
     super(id,deleteFlag);
     this.name = name;
     this.code = code;

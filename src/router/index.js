@@ -42,17 +42,17 @@ export const constantRouterMap = [
     name: 'cost',
     meta: { title: '消费管理', icon: 'example' },
     children: [
-      {
-        path: 'item',
-        name: 'item',
-        component: () => import('@/views/cost-manage/cost-item/b-cost-item'),
-        meta: { title: '消费项目', icon: 'table' }
-      },
+      // {
+      //   path: 'item',
+      //   name: 'item',
+      //   component: () => import('@/views/cost-manage/cost-item/b-cost-item'),
+      //   meta: { title: '消费项目', icon: 'table' }
+      // },
       {
         path: 'type',
         name: 'type',
         component: () => import('@/views/cost-manage/cost-type/b-cost-type'),
-        meta: { title: '消费类型', icon: 'table' }
+        meta: { title: '消费项目', icon: 'table' }
       },
       {
         path: 'record',

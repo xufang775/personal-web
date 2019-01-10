@@ -9,7 +9,7 @@
       <!--<el-table-column prop="code" label="编码" width="110" align="center"></el-table-column>-->
       <el-table-column prop="name" label="名称" width="200" align="left">
         <template slot-scope="scope">
-          <span style="display: inline-block;" :style="{'margin-left':scope.row.code.length == 2 ? '0px':(scope.row.code.length/2*10)+'px'}">{{scope.row.name}}</span>
+          <span style="display: inline-block;" :style="{'margin-left':scope.row.code.length == 2 ? '0px':(scope.row.code.length/2*10)+'px'}"> - {{scope.row.name}}</span>
         </template>
       </el-table-column>
       <!--<el-table-column prop="type" label="类型" width="90">-->
@@ -19,6 +19,7 @@
           <!--<span v-if="scope.row.type==2">固定消费</span>-->
         <!--</template>-->
       <!--</el-table-column>-->
+      <el-table-column prop="field" label="字段" width="100"></el-table-column>
       <el-table-column prop="enabled" label="激活" width="90">
         <template slot-scope="scope">
           {{ scope.row.enabled?'是':'否' }}

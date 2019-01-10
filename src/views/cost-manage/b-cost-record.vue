@@ -65,7 +65,7 @@
             status:'add',
             model: new CostRecord({costDate:costDate}),
             yes:(res)=>{
-              this.$refs.list.getList();
+              this.$refs.list.fetchData();
               console.log(4321);
               this.dCR.close()
             }

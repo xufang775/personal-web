@@ -2,18 +2,21 @@
   <el-dialog :visible.sync="pDialog.visible" :title="title" :before-close="handleClose" @open="handleOpen" :width="width">
     <el-form :rules="rules" ref="form" :model="model" label-position="right" :label-width="labelWidth" >
       <el-form-item label="上级项目" label-width="" prop="itemName">
-        <el-cascader
-          expand-trigger="hover"
-          :options="dicCode"
-          :change-on-select="true"
-          v-model="model.parentCode">
-        </el-cascader>
+        <template v-if="dicCode.length>0">
+          <el-cascader
+            expand-trigger="hover"
+            :options="dicCode"
+            :change-on-select="true"
+            v-model="model.parentCode">
+          </el-cascader>
+        </template>
+        <template v-else>无-顶级类型</template>
       </el-form-item>
       <el-form-item label="项目名称" label-width="" prop="itemName">
         <el-input v-model="model.name"></el-input>
       </el-form-item>
-      <!--<el-form-item label="排序" label-width="" prop="sortNo">-->
-        <!--<el-input v-model.number="model.sortNo"></el-input>-->
+      <!--<el-form-item label="编码字段" label-width="" prop="field">-->
+        <!--<el-input v-model="model.field"></el-input>-->
       <!--</el-form-item>-->
       <el-form-item label="备注" prop="remark">
         <el-input type="textarea" :autosize="{ minRows:2,maxRows:4 }" v-model="model.remark"></el-input>
@@ -36,7 +39,7 @@
       extends: BaseDialogNew ,
       data(){
         return {
-          api:{ save:api.costType.save,cascader:api.costType.cascader },
+          api:{ save:api.costType.save,getCascader:api.costType.getCascader },
           rules:{
             name:[{ required: true, message: '消费项目不能为空'}],
             // type:[{ required: true, message: '消费日期不能为空'}],

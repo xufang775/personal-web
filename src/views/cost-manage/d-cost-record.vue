@@ -4,10 +4,19 @@
       <el-form-item label="消费日期" label-width="" prop="costDate">
         <el-date-picker type="date" placeholder="选择日期" v-model="model.costDate" :disabled="elementDisabled.costDate[status]"></el-date-picker>
       </el-form-item>
-      <el-form-item label="消费项目" prop="costItemId">
-        <el-select v-model="model.costItemId" placeholder="" :disabled="elementDisabled.costItemId[status]">
-          <el-option v-for="item in dics.costItemId" :key="item.key" :label="item.value" :value="item.key"></el-option>
-        </el-select>
+      <!--<el-form-item label="消费项目" prop="costItemId">-->
+        <!--<el-select v-model="model.costItemId" placeholder="" :disabled="elementDisabled.costItemId[status]">-->
+          <!--<el-option v-for="item in dics.costItemId" :key="item.key" :label="item.value" :value="item.key"></el-option>-->
+        <!--</el-select>-->
+      <!--</el-form-item>-->
+      <el-form-item label="消费项目" prop="costTypeCode">
+          <el-cascader
+            expand-trigger="hover"
+            :options="dics.costTypeCode"
+            :change-on-select="true"
+            v-model="model.costTypeCodeArr">
+          </el-cascader>
+        <!--{{model.costTypeCodeArr}}-->
       </el-form-item>
       <el-form-item label="消费金额" prop="costPrice">
         <el-input v-model.number="model.costPrice" autocomplete="off"></el-input>
@@ -24,15 +33,16 @@
 </template>
 
 <script>
-  import { BaseDialog,BaseDialogNew, CostRecord, dicCostItem, saveCostRecord, } from './a-import';
+  import { api,reqGet,reqPost, BaseDialogNew } from './a-import'
+  import {  CostRecord, dicCostItem, saveCostRecord, } from './a-import';
     export default {
       name: "d-cost-record",
       extends:BaseDialogNew,
       data(){
         return {
-          // model: new CostRecord({costDate:new Date}),
+          api:{ save:api.costRecord.save,getCascader:api.costType.getCascader },
           dics:{
-            costItemId:[]
+            costTypeCode:[]
           },
           rules:{
             costItemId:[{ required: true, message: '消费项目不能为空'}],
@@ -72,9 +82,16 @@
           })
         },
         handleOpen(){
-          dicCostItem().then(res=>{
-            this.dics.costItemId = res.data;
-          })
+          // dicCostItem().then(res=>{
+          //   this.dics.costItemId = res.data;
+          // })
+          reqPost(this.api.getCascader)
+            .then(res=>{
+              if(res.success){
+                this.dics.costTypeCode=res.data;
+              }
+              console.log(this.dics['code']);
+            });
         },
         handleKeyup(e){
           console.log(e);

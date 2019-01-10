@@ -25,6 +25,10 @@
     export default {
       name: "z-cost-record-table",
       props:{
+        searchType:{
+         type:String,
+         default:'month'
+        },
         headerOne:{
           type:FieldLabel,
           default: ()=> new FieldLabel({ field:'date',label:'日期' })
@@ -47,8 +51,7 @@
         }
       },
       created(){
-        // this.fetchData();
-        this.fetchDataMonth();
+        this.fetchData();
       },
       methods:{
         cellRClick(col,colKey,row,rowKey){
@@ -56,39 +59,64 @@
         },
         fetchData(){
           let costMonthObj = month(this.currentDate);
-          let params = {costYearStr:costMonthObj.yearStr,searchType:'year'};
+          let params = {};
+          switch (this.searchType){
+            case 'month':
+              params = {costMonthStr: costMonthObj.monthStr,searchType:this.searchType};
+              break;
+            case 'year':
+              params = {costYearStr: costMonthObj.yearStr,searchType:this.searchType};
+              break;
+          }
           reqPost(api.costRecord.getRecordTableData, params)
             .then(res=>{
-              if(res.success){
-                console.log(res.data);
-                if(this.isShowHeaderSum){
-                  this.columns = [...res.data.cols,this.headerSum];
-                } else {
-                  this.columns = res.data.cols;
-                }
+              if(res.success) {
+                this.columns = this.isShowHeaderSum ? [...res.data.cols, this.headerSum] : res.data.cols;
+                console.log(this.columns);
                 let data = res.data.list;
                 this.rows = [];
-                //================计算其他行======================
-                let first = costMonthObj.firstNum;
-                let last = costMonthObj.lastNum;
-
-                for(let i= 1; i<= 12; i++){
-                  let dateStr = ( i<10 ? '0' + i : i);
-                  let iMonthObj = month(costMonthObj.monthStr + '-' + dateStr);
-                  let monthStr = costMonthObj.yearStr + '-' + dateStr;
-                  //处理列
-                  let row = this.handleCol(data,monthStr);
-                  this.rows.push(row);
-                }
-
-                //================处理合计行================
-                let rowSum = this.handleRowSum(data);
-                this.rows.push(rowSum);
-                console.log(this.rows);
-
-                this.$emit('totalChange',this.total);
+                this.handleRow(data,costMonthObj,params.searchType);
               }
             })
+        },
+        handleRow(data,costMonthObj,searchType){
+          if(searchType == 'month'){
+            //================计算其他行======================
+            let first = costMonthObj.firstNum;
+            let last = costMonthObj.lastNum;
+
+            for(let i= first; i<= last; i++){
+              let dateStr = ( i<10 ? '0' + i : i);
+              let iMonthObj = month(costMonthObj.monthStr + '-' + dateStr);
+              //处理列
+              let row = this.handleColMonth(data,iMonthObj);
+              this.rows.push(row);
+            }
+
+            //================处理合计行================
+            let rowSum = this.handleRowSumMonth(data);
+            this.rows.push(rowSum);
+            this.$emit('totalChange',this.total);
+
+          } else if(searchType == 'year'){
+            //================计算其他行======================
+            let first = 1;
+            let last = 12;
+
+            for(let i= first; i<= last; i++){
+              let dateStr = ( i<10 ? '0' + i : i);
+              let iMonthObj = month(costMonthObj.monthStr + '-' + dateStr);
+              let monthStr = costMonthObj.yearStr + '-' + dateStr;
+              //处理列
+              let row = this.handleCol(data,monthStr);
+              this.rows.push(row);
+            }
+
+            //================处理合计行================
+            let rowSum = this.handleRowSum(data);
+            this.rows.push(rowSum);
+            this.$emit('totalChange',this.total);
+          }
         },
         handleRowSum(data){
           // ==================计算行合计========================
@@ -161,42 +189,6 @@
             }
           });
           return row;
-        },
-
-        fetchDataMonth(){
-          let costMonthObj = month(this.currentDate);
-          let params = {costMonthStr: costMonthObj.monthStr,searchType:'month'};
-          reqPost(api.costRecord.getRecordTableData, params)
-            .then(res=>{
-              if(res.success) {
-                console.log(res.data);
-                if (this.isShowHeaderSum) {
-                  this.columns = [...res.data.cols, this.headerSum];
-                } else {
-                  this.columns = res.data.cols;
-                }
-                let data = res.data.list;
-                this.rows = [];
-
-                //================计算其他行======================
-                let first = costMonthObj.firstNum;
-                let last = costMonthObj.lastNum;
-
-                for(let i= first; i<= last; i++){
-                  let dateStr = ( i<10 ? '0' + i : i);
-                  let iMonthObj = month(costMonthObj.monthStr + '-' + dateStr);
-                  //处理列
-                  let row = this.handleColMonth(data,iMonthObj);
-                  this.rows.push(row);
-                }
-
-                //================处理合计行================
-                let rowSum = this.handleRowSumMonth(data);
-                this.rows.push(rowSum);
-                console.log(this.rows);
-                this.$emit('totalChange',this.total);
-              }
-            })
         },
         handleRowSumMonth(data){
           // ==================计算行合计========================

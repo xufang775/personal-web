@@ -47,7 +47,7 @@ const user = {
         getInfo(state.token)
           .then(response => {
             const data = response.data
-            if (data.roles && data.roles.length > 0) {
+            if (data.roles && data.roles.length >= 0) {
               commit('SET_ROLES', data.roles)
             } else {
               reject('getInfo: roles must be a non-null array !')

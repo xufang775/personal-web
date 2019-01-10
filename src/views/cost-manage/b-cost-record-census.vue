@@ -9,7 +9,11 @@
         <!--</el-col>-->
         <el-col :span="24">
           <z-current-date type="month"></z-current-date>
-          <z-cost-record-table :isShowHeaderSum="true" :headerOne="headerOne"></z-cost-record-table>
+          <z-cost-record-table
+            :isShowHeaderSum="true"
+            :search-type="tableConfig[searchType].type"
+            :headerOne="tableConfig[searchType].headerOne"
+          ></z-cost-record-table>
         </el-col>
       </el-row>
     </div>
@@ -29,7 +33,18 @@
         return {
           yearList:[],
           // headerOne:new FieldLabel({ field:'costMonth',label:'月份' })
-          headerOne:new FieldLabel({ field:'date',label:'日期' })
+          // headerOne:new FieldLabel({ field:'date',label:'日期' })
+          searchType:'month',
+          tableConfig:{
+            month:{
+              type:'month',
+              headerOne:new FieldLabel({ field:'date',label:'日期' })
+            },
+            year:{
+              type:'year',
+              headerOne:new FieldLabel({ field:'costMonth',label:'月份' })
+            },
+          }
         }
       },
       created(){
