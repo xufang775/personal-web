@@ -13,7 +13,11 @@
             :isShowHeaderSum="true"
             :search-type="tableConfig[searchType].type"
             :headerOne="tableConfig[searchType].headerOne"
-          ></z-cost-record-table>
+          >
+            <template slot-scope="scope">
+              {{ scope.row[scope.col.field] }}
+            </template>
+          </z-cost-record-table>
         </el-col>
       </el-row>
     </div>

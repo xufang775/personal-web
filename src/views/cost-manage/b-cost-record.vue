@@ -4,11 +4,25 @@
         <s-cost-record ref="search" @onSearch="handleSearch"></s-cost-record>
       </div>
       <div class="buttons-container">
-        <el-button class="filter-item" type="primary" @click="handleAdd">新增</el-button>
-        <el-button class="filter-item" type="primary" @click="handleAddMore">新增-批量</el-button>
-        <el-button class="filter-item" type="primary" @click="handleAddPoi">批量插入</el-button>
+        <div style="float: left">
+          <el-button class="filter-item" type="primary" @click="handleAdd">新增</el-button>
+          <el-button class="filter-item" type="primary" @click="handleAddMore">新增-批量</el-button>
+          <el-button class="filter-item" type="primary" @click="handleAddPoi">批量插入</el-button>
+        </div>
+        <div style="float: right;clear: right;">
+          <!--<el-button class="filter-item" type="primary" @click="handleAdd">记录</el-button>-->
+          <!--<el-button class="filter-item" type="primary" @click="handleAddMore">日</el-button>-->
+          <!--<el-button class="filter-item" type="primary" @click="handleAddPoi">月</el-button>-->
+          <el-radio-group v-model="radio3">
+            <el-radio-button label="record" >记录</el-radio-button>
+            <el-radio-button label="date">日</el-radio-button>
+            <el-radio-button label="month">月</el-radio-button>
+            <el-radio-button label="year">年</el-radio-button>
+          </el-radio-group>
+        </div>
+        <div style="clear: both;"></div>
       </div>
-      <div class="list-container">
+      <div class="list-container" >
         <l-cost-record ref="list" @editRow="handleEditRow"></l-cost-record>
       </div>
       <!--<d-add-edit ref="dAddEdit" @visibleChange="hideAddEdit" @postSuccess="refreshList"></d-add-edit>-->
@@ -29,6 +43,7 @@
       name: "index",
       data(){
         return {
+          radio3:'',
           dCR: new Dialog({ref:'dCostRecord'})
         }
       },

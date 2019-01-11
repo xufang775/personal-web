@@ -9,7 +9,8 @@
       <td>{{row[headerOne.field]}}</td>
       <template v-for="(col,colKey) in columns" >
         <td @click.right.prevent="cellRClick(col,colKey,row,rowKey)">
-          {{row[col.field]}}
+          <!--{{row[col.field]}}-->
+          <slot :row="row" :rowKey="rowKey" :col="col" :colKey="colKey"></slot>
         </td>
       </template>
       <!--<td v-if="isShowHeaderSum">{{row[headerSum.field]}}</td>-->
