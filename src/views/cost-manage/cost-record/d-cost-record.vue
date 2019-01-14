@@ -11,6 +11,7 @@
             :change-on-select="true"
             v-model="model.costTypeCodeArr">
           </el-cascader>
+
       </el-form-item>
       <el-form-item label="消费金额" prop="costPrice">
         <el-input v-model.number="model.costPrice" autocomplete="off"></el-input>
@@ -27,8 +28,8 @@
 </template>
 
 <script>
-  import { api,reqGet,reqPost, BaseDialogNew } from './a-import'
-  import {  CostRecord } from './a-import';
+  import { api,reqGet,reqPost, BaseDialogNew } from '../a-import'
+  import {  CostRecord } from '../a-import';
     export default {
       name: "d-cost-record",
       extends:BaseDialogNew,

@@ -4,7 +4,6 @@ import Vue from 'vue'
 import 'normalize.css/normalize.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import locale from 'element-ui/lib/locale/lang/en' // lang il8n
 
 import '@/styles/index.scss' // global css
 
@@ -18,6 +17,7 @@ import '@/icons' // icon
 import '@/permission' // permission control
 import base from '@/components/base/base'
 import moment from "moment";
+import '@/components/global'
 
 
 // Vue.use(ElementUI, { locale })

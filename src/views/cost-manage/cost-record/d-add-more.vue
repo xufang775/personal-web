@@ -69,7 +69,7 @@
 </template>
 
 <script>
-  import { BaseDialog, CostRecord, dicCostItem, saveCostRecordList } from './a-import';
+  import { BaseDialog, CostRecord, dicCostItem, saveCostRecordList } from '../a-import';
   //id生成工具 这个比用看 示例而已 模拟后台返回的id
   var generateId = {
     _count: 1,

@@ -9,6 +9,7 @@
             :change-on-select="true"
             v-model="model.parentCode">
           </el-cascader>
+          <!--{{model.parentCode}}-->
         </template>
         <template v-else>无-顶级类型</template>
       </el-form-item>

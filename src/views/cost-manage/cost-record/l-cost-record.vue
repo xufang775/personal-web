@@ -47,7 +47,7 @@
 
 <script>
   import moment from "moment";
-  import { BaseList, api } from './a-import';
+  import { BaseList, api } from '../a-import';
 
   export default {
     name: "l-cost-record",

@@ -126,10 +126,20 @@ export default {
       });
     },
     handleEditRow(row){
+      let temp = Object.assign({}, row); // copy obj
+      // 处理上级项目编码
+      if(temp.code){
+        let parentCode = [];
+        for(let i=2;i<temp.code.length;i=i+2){
+          parentCode.push(temp.code.substring(0,i));
+        }
+        temp.parentCode = parentCode;
+      }
+
       this.dAddEdit.open({
         title:'编辑消费项目',
         status:'edit',
-        model: row,
+        model: temp,
         yes:(res)=>{
           this.$refs.list.fetchData();
           this.dAddEdit.close()
@@ -137,6 +147,7 @@ export default {
       });
     },
     handleTypeConfigEditRow(row){
+      let temp = Object.assign({}, row); // copy obj
       this.dAddEditTypeConfig.open({
         title:'编辑消费项目',
         status:'edit',

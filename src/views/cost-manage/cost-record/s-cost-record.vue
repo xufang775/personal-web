@@ -33,9 +33,15 @@
       </el-col>
     </el-form-item>
     <el-form-item label="消费项目">
-      <el-select v-model="model.costItemId" placeholder="消费项目">
-        <el-option v-for="item in dics.costItemId" :key="item.key" :label="item.value" :value="item.key"></el-option>
-      </el-select>
+      <el-cascader
+        expand-trigger="hover"
+        :options="dics.costTypeCode"
+        :change-on-select="true"
+        v-model="model.costTypeCodeArr">
+      </el-cascader>
+      <!--<el-select v-model="model.costItemId" placeholder="消费项目">-->
+        <!--<el-option v-for="item in dics.costItemId" :key="item.key" :label="item.value" :value="item.key"></el-option>-->
+      <!--</el-select>-->
     </el-form-item>
     <el-form-item label="备注">
       <el-input v-model="model.remark" placeholder="备注" ></el-input>
@@ -49,7 +55,8 @@
 </template>
 
 <script>
-  import { BaseSearch,CostRecordSearch, dicCostItem, saveCostRecord, } from './a-import';
+  import { api,reqGet,reqPost, BaseDialogNew } from '../a-import'
+  import { BaseSearch,CostRecordSearch, dicCostItem, saveCostRecord, } from '../a-import';
   // import { dicCostItem  } from './url'
   // import { BaseSearch } from '@/components/base'
     export default {
@@ -57,10 +64,11 @@
       extends: BaseSearch,
       data(){
         return {
-          model: new CostRecordSearch({}),
+          api:{ getCascader:api.costType.getCascader },
           dics:{
-            costItemId:[]
-          }
+            costTypeCode:[]
+          },
+          model: new CostRecordSearch({}),
         }
       },
       watch:{
@@ -70,9 +78,15 @@
       },
       methods: {
         onCreated(){
-          dicCostItem().then(res=>{
-            this.dics.costItemId = res.data;
-          })
+          // dicCostItem().then(res=>{
+          //   this.dics.costItemId = res.data;
+          // })
+          reqPost(this.api.getCascader)
+            .then(res=>{
+              if(res.success){
+                this.dics.costTypeCode=res.data;
+              }
+            });
         }
       }
     }

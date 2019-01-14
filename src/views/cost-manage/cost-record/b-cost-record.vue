@@ -7,7 +7,7 @@
         <div style="float: left">
           <el-button class="filter-item" type="primary" @click="handleAdd">新增</el-button>
           <el-button class="filter-item" type="primary" @click="handleAddMore">新增-批量</el-button>
-          <el-button class="filter-item" type="primary" @click="handleAddPoi">批量插入</el-button>
+          <!--<el-button class="filter-item" type="primary" @click="handleAddPoi">批量插入</el-button>-->
         </div>
         <div style="float: right;clear: right;">
           <!--<el-button class="filter-item" type="primary" @click="handleAdd">记录</el-button>-->
@@ -26,15 +26,15 @@
         <l-cost-record ref="list" @editRow="handleEditRow"></l-cost-record>
       </div>
       <!--<d-add-edit ref="dAddEdit" @visibleChange="hideAddEdit" @postSuccess="refreshList"></d-add-edit>-->
-      <!--<d-add-more ref="dAddMore" @postSuccess="refreshList"></d-add-more>-->
+      <d-add-more ref="dAddMore" @postSuccess="handleFresh"></d-add-more>
       <!--<d-add-upload-poi ref="dUploadPoi"></d-add-upload-poi>-->
       <d-cost-record :ref="dCR.ref" :pDialog="dCR" @close="dCR.close()" @saveSuccess="dCR.yes"></d-cost-record>
     </div>
 </template>
 
 <script>
-  import {  dAddEdit,dAddMore,dAddUploadPoi,lCostRecord,sCostRecord,dCostItem,dCostRecord } from './a-import'
-  import { CostRecord,CostRecordSearch,Dialog } from "./a-import";
+  import {  dAddEdit,dAddMore,dAddUploadPoi,lCostRecord,sCostRecord,dCostItem,dCostRecord } from '../a-import'
+  import { CostRecord,CostRecordSearch,Dialog } from "../a-import";
 
     export default {
       components: {
@@ -87,10 +87,20 @@
           });
         },
         handleEditRow(row){
+          let temp = Object.assign({}, row); // copy obj
+          // 处理上级项目编码
+          if(temp.costTypeCode){
+            let typeCodeArr = [];
+            for(let i=2;i<=temp.costTypeCode.length;i=i+2){
+              typeCodeArr.push(temp.costTypeCode.substring(0,i));
+            }
+            temp.costTypeCodeArr = typeCodeArr;
+          }
+
           this.dCR.open({
             title:'编辑消费项目',
             status:'edit',
-            model: Object.assign({},row),
+            model: temp,
             yes:(res)=>{
               this.$refs.list.fetchData();
               this.dCR.close()
