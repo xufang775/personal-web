@@ -49,6 +49,7 @@
       },
       methods:{
         handleSearch(data){
+          debugger;
           this.$refs.list.listQuery.params = data;
           this.$refs.list.fetchData();
         },
@@ -74,13 +75,13 @@
             }
           }
 
-
+          let self = this;
           this.dCR.open({
             title:'新增消费记录',
             status:'add',
             model: new CostRecord({costDate:costDate}),
             yes:(res)=>{
-              this.$refs.list.fetchData();
+              self.$refs.list.fetchData();
               console.log(4321);
               this.dCR.close()
             }

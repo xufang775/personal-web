@@ -63,8 +63,14 @@ export const constantRouterMap = [
       {
         path: 'record-edit',
         name: 'record-edit',
-        component: () => import('@/views/cost-manage/cost-record/b-cost-record-edit'),
+        component: () => import('@/views/cost-manage/cost-record/b-cost-record-more'),
         meta: { title: '消费记录-新增', icon: 'tree' }
+      },
+      {
+        path: 'record-table',
+        name: 'record-table',
+        component: () => import('@/views/cost-manage/cost-record/b-cost-record-table'),
+        meta: { title: '消费记录-表格', icon: 'tree' }
       },
       {
         path: 'record-date',

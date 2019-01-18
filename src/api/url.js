@@ -63,7 +63,8 @@ export default {
   costTypeConfig:{
     getPageList:haddleZuul('money')+ '/costTypeConfig/getPageList',
     save:haddleZuul('money')+ '/costTypeConfig/save',
-    delete:haddleZuul('money')+'/costTypeConfig/delete'
+    delete:haddleZuul('money')+'/costTypeConfig/delete',
+    getKeyLabelList:haddleZuul('money')+'/costTypeConfig/getKeyLabelList',
   },
   costRecord:{
     getPageList:haddleZuul('money') + '/costRecord/pageListHasDic',

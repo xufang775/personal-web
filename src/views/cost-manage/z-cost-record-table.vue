@@ -48,7 +48,14 @@
         return{
           total:{sumAll:''},
           columns:[{ field:'item1',label:'日期' },{ field:'item2',label:'日期2' }],
-          rows:[{date:'1',item1:'111',item2:'222'},{date:'2',item1:'111',item2:'222'},]
+          rows:[{date:'1',item1:'111',item2:'222'},{date:'2',item1:'111',item2:'222'},],
+          currentDate: new Date
+        }
+      },
+      watch:{
+        searchType:function (val) {
+          var aa = this.currentDate;
+          this.fetchData();
         }
       },
       created(){
@@ -58,8 +65,12 @@
         cellRClick(col,colKey,row,rowKey){
 
         },
-        fetchData(){
+        fetchData(currData=null){
+          if(currData){
+            this.currentDate = currData;
+          }
           let costMonthObj = month(this.currentDate);
+
           let params = {};
           switch (this.searchType){
             case 'month':
@@ -243,11 +254,21 @@
               }
             } else {
               let itemData = data.find(m=> moment(m.costDate).format('YYYY-MM-DD') == iMonthObj.todayStr  && m.costTypeCode!=null && m.costTypeCode.indexOf(iCol.key)==0 );
-              if(itemData){
-                row[iCol.field] = itemData.costPrice;
-                // 处理详情信息
-                let costPriceAll=(itemData.costPriceAll).split('||');
-                let remarkAll=itemData.remarkAll?itemData.remarkAll.split('||'):[];
+              let itemDatas = data.filter(m=> moment(m.costDate).format('YYYY-MM-DD') == iMonthObj.todayStr  && m.costTypeCode!=null && m.costTypeCode.indexOf(iCol.key)==0 );
+              if(itemDatas && itemDatas.length>0){
+                let sumCol =0;
+                let costPriceAll=[];
+                let remarkAll=[];
+                itemDatas.forEach(item=>{
+                  sumCol +=item.costPrice*100;
+                  // 处理详情信息
+                  costPriceAll.push(...(item.costPriceAll).split('||'));
+                  // remarkAll.push(...(item.remarkAll).split('||'));
+                });
+                row[iCol.field] = sumCol/100;
+                // // 处理详情信息
+                // let costPriceAll=(itemData.costPriceAll).split('||');
+                // let remarkAll=itemData.remarkAll?itemData.remarkAll.split('||'):[];
                 let details =[];
                 costPriceAll.forEach((m,k)=>{
                   details.push({
@@ -257,6 +278,20 @@
                 });
                 row['details-'+iCol.field]=details;
               }
+              // if(itemData){
+              //   row[iCol.field] = itemData.costPrice;
+              //   // 处理详情信息
+              //   let costPriceAll=(itemData.costPriceAll).split('||');
+              //   let remarkAll=itemData.remarkAll?itemData.remarkAll.split('||'):[];
+              //   let details =[];
+              //   costPriceAll.forEach((m,k)=>{
+              //     details.push({
+              //       costPrice:m,
+              //       remark:remarkAll.length-1>=k? remarkAll[k]:''
+              //     })
+              //   });
+              //   row['details-'+iCol.field]=details;
+              // }
             }
           });
           return row;
@@ -277,13 +312,14 @@
     }
   }
   .my-table{
+
     border:1px $borderColor;
     font-size: 10px;
     border-collapse: collapse;
     margin: 5px auto;
     th{background-color: $tdHeaderbgColor;padding: 8px;border: 1px solid $borderColor;font-size: $headFontSize}
     th:first-child{width: 100px;}
-    td{border: 1px solid $borderColor;text-align: center;height: 20px;position: relative; width: 120px;}
+    td{border: 1px solid $borderColor;text-align: center;height: 20px;position: relative; width: 120px; height: 24px;}
     td>input{width: 100%;height: 20px;border: 0px;padding-left: 2px; text-align: center; }
     td:hover,td>input:hover{background: yellow!important;}
     //表格列头样式
