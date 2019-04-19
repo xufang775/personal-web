@@ -13,7 +13,7 @@
           <!--<el-button class="filter-item" type="primary" @click="handleAdd">记录</el-button>-->
           <!--<el-button class="filter-item" type="primary" @click="handleAddMore">日</el-button>-->
           <!--<el-button class="filter-item" type="primary" @click="handleAddPoi">月</el-button>-->
-          <el-radio-group v-model="radio3">
+          <el-radio-group v-model="searchType">
             <el-radio-button label="record" >记录</el-radio-button>
             <el-radio-button label="date">日</el-radio-button>
             <el-radio-button label="month">月</el-radio-button>
@@ -25,9 +25,7 @@
       <div class="list-container" >
         <l-cost-record ref="list" @editRow="handleEditRow"></l-cost-record>
       </div>
-      <!--<d-add-edit ref="dAddEdit" @visibleChange="hideAddEdit" @postSuccess="refreshList"></d-add-edit>-->
       <d-add-more ref="dAddMore" @postSuccess="handleFresh"></d-add-more>
-      <!--<d-add-upload-poi ref="dUploadPoi"></d-add-upload-poi>-->
       <d-cost-record :ref="dCR.ref" :pDialog="dCR" @close="dCR.close()" @saveSuccess="dCR.yes"></d-cost-record>
     </div>
 </template>
@@ -43,18 +41,19 @@
       name: "index",
       data(){
         return {
-          radio3:'',
+          searchType:'record',
           dCR: new Dialog({ref:'dCostRecord'})
         }
       },
       methods:{
         handleSearch(data){
-          debugger;
-          this.$refs.list.listQuery.params = data;
+          // this.$refs.list.listQuery.params = data;
+          this.$refs.list.handleLoadBefore(data);
           this.$refs.list.fetchData();
         },
         handleFresh(){
-          this.$refs.list.listQuery.params = new CostRecordSearch();
+          this.$refs.list.handleLoadBefore(new CostRecordSearch());
+          // this.$refs.list.listQuery.params = new CostRecordSearch();
           this.$refs.list.fetchData();
         },
         handleAdd(){

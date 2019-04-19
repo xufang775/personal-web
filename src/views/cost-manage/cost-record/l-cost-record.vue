@@ -62,6 +62,10 @@
     },
     methods:{
       // 根据日期，为周六日打个标记
+      handleLoadBefore(params){
+        this.api.pageList = api.costRecord.getPageList;
+        this.listQuery.params = params;
+      },
       weekenStr(date){
         const weekNum = moment(date).day();
         if(weekNum == 6){

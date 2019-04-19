@@ -8,13 +8,14 @@
         </el-select>
       </div>
       <div style="flex: 2;text-align: center;">
-        <z-current-date :type="dateSearchType" @dateChange="handleDateChange"></z-current-date>
+        <z-current-date ref="cCurrentDate" :type="dateSearchType" @dateChange="handleDateChange"></z-current-date>
       </div>
       <div style="flex: 1;text-align: right;">
         <el-radio-group v-model="dateSearchType">
           <el-radio-button label="month">月</el-radio-button>
           <el-radio-button label="year">年</el-radio-button>
         </el-radio-group>
+        <el-button type="primary" icon="el-icon-refresh"></el-button>
       </div>
       <div style="clear: both;"></div>
     </div>
@@ -47,9 +48,25 @@
             <span :class="{'detail-ico':true}"></span>
           </div>
         </el-popover>
-        {{ scope.row[scope.col.field] }}
+        <input v-if="scope.col.field !='sum' && scope.row.dateStr !='sum'"
+               :ref="'input'+scope.rowKey+'-'+scope.colKey"
+               @click.right.prevent="cellRClick(scope.col,scope.colKey,scope.row,scope.rowKey)"
+               @keyup.enter.prevent="cellSave(scope.col,scope.colKey,scope.row,scope.rowKey)"
+               @keyup.alt.83="cellSave(scope.col,scope.colKey,scope.row,scope.rowKey)"
+               @click.ctrl="doSomething"
+               @keyup.alt.65="doSomething"
+               @keyup.left="cellFocus(scope.col,scope.colKey,scope.row,scope.rowKey,'left')"
+               @keyup.right="cellFocus(scope.col,scope.colKey,scope.row,scope.rowKey,'right')"
+               @keyup.up="cellFocus(scope.col,scope.colKey,scope.row,scope.rowKey,'up')"
+               @keyup.down="cellFocus(scope.col,scope.colKey,scope.row,scope.rowKey,'down')"
+               :style="{background:scope.row.isWeekend?weekendBg:''}"
+               :value="scope.row[scope.col.field]" >
+        <span v-else>{{ scope.row[scope.col.field] }}</span>
+
       </template>
-    </z-cost-record-table></div>
+    </z-cost-record-table>
+    </div>
+    <d-cost-record :ref="dCR.ref" :pDialog="dCR" @close="dCR.close()" @saveSuccess="dCR.yes"></d-cost-record>
   </div>
 </template>
 
@@ -58,19 +75,23 @@
   import ZCurrentDate from "../z-current-date";
   import ZCostRecordTable from "../z-cost-record-table";
   import { FieldLabel } from "../../../utils/tools";
-
+  import { Dialog,CostRecord,dCostRecord,saveCostRecord } from "../a-import";
+  import moment from 'moment';
   export default {
     components: {
       ZCostRecordTable,
-      ZCurrentDate
+      ZCurrentDate,
+      dCostRecord
     },
     name: "b-cost-record-table",
     data(){
       return {
+        weekendBg:'#d0e69c',
         dateSearchType:'month',
         typeConfigId:'',
         currentDate: new Date,
         typeConfigDic:[],
+        dCR: new Dialog({ref:'dCostRecord'}),
         tableConfig:{
           month:{
             type:'month',
@@ -92,12 +113,76 @@
           .then(res=>{
             if(res.success){
               this.typeConfigDic = res.data;
-              // this.typeConfigId = this.dics.typeConfig[0].key;
+              if(this.typeConfigDic.length>0){
+                this.typeConfigId = this.typeConfigDic[0].key;
+              }
+
             }
           });
       },
       handleDateChange(date){
         this.$refs.recordTable.fetchData(date);
+      },
+      cellFocus(col,colKey,row,rowKey,flag){
+        let obj;
+        switch (flag){
+          case 'right':
+            obj = this.$refs['input'+rowKey+'-'+(colKey+1)];
+            break;
+          case 'left':
+            obj = this.$refs['input'+rowKey+'-'+(colKey-1)];
+            break;
+          case 'up':
+            obj = this.$refs['input'+(rowKey-1)+'-'+(colKey)];
+            break;
+          case 'down':
+            obj = this.$refs['input'+(rowKey+1)+'-'+(colKey)];
+            break;
+        }
+        if(obj){
+          obj.focus();
+        }
+      },
+      cellSave(col,colKey,row,rowKey){
+        let obj =this.$refs['input'+rowKey+'-'+(colKey)];
+        let data = new CostRecord({
+          costDate:moment(row.dateStr),
+          costTypeCodeArr:this.handleTypeCode(col.key),
+          deleteFlag:false,
+          costPrice:obj.value
+        });
+        saveCostRecord(data)
+          .then(res=>{
+            if(res.success){
+              this.$notify({
+                title:'成功',
+                message: '创建成功',
+                type: 'success',
+                duration: 2000
+              })
+            }
+          });
+      },
+      cellRClick(col,colIndex,row,rowIndex){
+        this.dCR.open({
+          title:'新增消费记录',
+          status:'add',
+          model: new CostRecord({costTypeCodeArr:this.handleTypeCode(col.key),costDate:moment(row.dateStr)}),
+          yes:(res)=>{
+            this.dCR.close();
+            let currDate= this.$refs.cCurrentDate.currentDate;
+            this.$refs.recordTable.fetchData(currDate);
+          }
+        });
+      },
+      handleTypeCode(typeCode){
+        let typeCodeArr = [];
+        if(typeCode){
+          for(let i=2;i<=typeCode.length;i=i+2){
+            typeCodeArr.push(typeCode.substring(0,i));
+          }
+        }
+        return typeCodeArr;
       }
     }
   }

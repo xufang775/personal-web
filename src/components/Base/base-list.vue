@@ -31,6 +31,7 @@
         this.fetchData();
       },
       fetchData(){
+        debugger;
         this.listLoading = true;
         reqPost(this.api.pageList,this.listQuery)
           .then(res=>{

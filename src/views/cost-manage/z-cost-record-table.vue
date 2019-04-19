@@ -8,7 +8,7 @@
     <tr v-for="(row,rowKey) in rows">
       <td>{{row[headerOne.field]}}</td>
       <template v-for="(col,colKey) in columns" >
-        <td @click.right.prevent="cellRClick(col,colKey,row,rowKey)">
+        <td @click.right.prevent="cellRClick(col,colKey,row,rowKey)" :style="{background:row.isWeekend ?weekendBg:''}">
           <!--{{row[col.field]}}-->
           <slot :row="row" :rowKey="rowKey" :col="col" :colKey="colKey"></slot>
         </td>
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+  import NProgress from 'nprogress' // Progress 进度条
   import { month } from './a-import'
   import moment from "moment";
   import { FieldLabel } from '@/utils/tools';
@@ -46,6 +47,7 @@
       },
       data(){
         return{
+          weekendBg:'#d0e69c',
           total:{sumAll:''},
           columns:[{ field:'item1',label:'日期' },{ field:'item2',label:'日期2' }],
           rows:[{date:'1',item1:'111',item2:'222'},{date:'2',item1:'111',item2:'222'},],
@@ -80,14 +82,17 @@
               params = {costYearStr: costMonthObj.yearStr,searchType:this.searchType};
               break;
           }
+          // NProgress.start();
           reqPost(api.costRecord.getRecordTableData, params)
             .then(res=>{
               if(res.success) {
                 this.columns = this.isShowHeaderSum ? [...res.data.cols, this.headerSum] : res.data.cols;
                 console.log(this.columns);
                 let data = res.data.list;
+                console.log(data);
                 this.rows = [];
                 this.handleRow(data,costMonthObj,params.searchType);
+                // NProgress.done();
               }
             })
         },
@@ -179,15 +184,26 @@
               }
             } else {
               let itemData = data.find(m=> m.costMonth == monthStr && m.costTypeCode!=null && m.costTypeCode.indexOf(iCol.key)==0);
-              if(itemData){
-                // if(){
-                //
-                // }
-                row[iCol.field] = itemData.costPrice;
-                // 处理详情信息
-                let costPriceAll=(itemData.costPriceAll).split('||');
-                let remarkAll=itemData.remarkAll?itemData.remarkAll.split('||'):[];
-                let costDateAll=itemData.costDateAll?itemData.costDateAll.split('||'):[];
+              let itemDatas = data.filter(m=> m.costMonth == monthStr && m.costTypeCode!=null && m.costTypeCode.indexOf(iCol.key)==0 );
+              if(itemDatas && itemDatas.length>0){
+                let sumCol =0;
+                let costPriceAll=[];
+                let costDateAll=[];
+                let remarkAll=[];
+                itemDatas.forEach(item=>{
+                  sumCol +=item.costPrice*100;
+                  // 处理详情信息
+                  costPriceAll.push(...(item.costPriceAll).split('||'));
+                  costDateAll.push(...(item.costDateAll).split('||'));
+                  if(item.remarkAll){
+                    remarkAll.push(...(item.remarkAll).split('||'));
+                  }
+
+                });
+                row[iCol.field] = sumCol/100;
+                // // 处理详情信息
+                // let costPriceAll=(itemData.costPriceAll).split('||');
+                // let remarkAll=itemData.remarkAll?itemData.remarkAll.split('||'):[];
                 let details =[];
                 costPriceAll.forEach((m,k)=>{
                   details.push({
@@ -263,12 +279,12 @@
                   sumCol +=item.costPrice*100;
                   // 处理详情信息
                   costPriceAll.push(...(item.costPriceAll).split('||'));
-                  // remarkAll.push(...(item.remarkAll).split('||'));
+                  if(item.remarkAll){
+                    remarkAll.push(...(item.remarkAll).split('||'));
+                  }
                 });
                 row[iCol.field] = sumCol/100;
                 // // 处理详情信息
-                // let costPriceAll=(itemData.costPriceAll).split('||');
-                // let remarkAll=itemData.remarkAll?itemData.remarkAll.split('||'):[];
                 let details =[];
                 costPriceAll.forEach((m,k)=>{
                   details.push({
@@ -278,20 +294,6 @@
                 });
                 row['details-'+iCol.field]=details;
               }
-              // if(itemData){
-              //   row[iCol.field] = itemData.costPrice;
-              //   // 处理详情信息
-              //   let costPriceAll=(itemData.costPriceAll).split('||');
-              //   let remarkAll=itemData.remarkAll?itemData.remarkAll.split('||'):[];
-              //   let details =[];
-              //   costPriceAll.forEach((m,k)=>{
-              //     details.push({
-              //       costPrice:m,
-              //       remark:remarkAll.length-1>=k? remarkAll[k]:''
-              //     })
-              //   });
-              //   row['details-'+iCol.field]=details;
-              // }
             }
           });
           return row;

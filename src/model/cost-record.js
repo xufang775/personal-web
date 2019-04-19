@@ -23,8 +23,9 @@ export class CostRecordSearch {
                 costPriceStart=undefined,
                 costPriceEnd=undefined,
                 costItemId,
-                remark
-              }={}){
+                remark,
+                searchType
+              }={searchType:'record'}){
     this.costDateStart= costDateStart;
     this.costDateEnd=costDateEnd;
     this.costMonth=costMonth;
@@ -32,6 +33,7 @@ export class CostRecordSearch {
     this.costPriceStart=costPriceStart;
     this.costPriceEnd=costPriceEnd;
     this.costItemId=costItemId;
-    this.remark=remark
+    this.remark=remark;
+    this.searchType=searchType;
   }
 }
