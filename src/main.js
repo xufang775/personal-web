@@ -26,7 +26,7 @@ Vue.config.productionTip = false
 import * as filters from './filters' // global filters
 
 Vue.use(ElementUI, {
-  size: 'mini', // set element-ui default size:medium,mini
+  size: 'medium', // set element-ui default size:medium,mini
   i18n: (key, value) => i18n.t(key, value)
 })
 

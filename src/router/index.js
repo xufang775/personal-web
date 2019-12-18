@@ -126,7 +126,7 @@ export const constantRouterMap = [
       {
         path: 'role',
         name: 'role',
-        component: () => import('@/views/system-manage/b-sys-role'),
+        component: () => import('@/views/system-manage/sys-role'),
         meta: { title: '角色管理', icon: 'table' }
       }
     ]

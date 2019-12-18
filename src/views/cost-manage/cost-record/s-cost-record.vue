@@ -1,7 +1,13 @@
 <template>
   <el-form :inline="true" :model="model" class="demo-form-inline">
-    <el-form-item label="消费年份">
-      <el-date-picker type="year" placeholder="消费年份" v-model="model.costYear" style="width: 140px;" @change="onSubmit"></el-date-picker>
+    <el-form-item>
+      <el-date-picker
+        type="year"
+        placeholder="消费年份"
+        v-model="model.costYear"
+        style="width: 120px;"
+        @change="onSubmit">
+      </el-date-picker>
     </el-form-item>
     <el-form-item label="消费月份">
       <el-date-picker type="month" placeholder="消费月份" v-model="model.costMonth" style="width: 140px;" @change="onSubmit"></el-date-picker>

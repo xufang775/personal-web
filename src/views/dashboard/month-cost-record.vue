@@ -65,7 +65,6 @@
           const monthInfo = this.getMonthInfo();
           const firstDate = monthInfo.firstDateNum;
           const lastDate = monthInfo.lastDateNum;
-          debugger;
           for(let i=firstDate; i<= lastDate; i++){
             const date1 = moment().format('YYYY-MM-'+i);
             const currentDay = moment(date1).day();
