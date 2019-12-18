@@ -8,7 +8,7 @@ export default {
   watch: {
     $route (route) {
       if (this.device === 'mobile' && this.sidebar.opened) {
-        store.dispatch('CloseSideBar', { widthoutAnimation: false })
+        store.dispatch('CloseSideBar', { withoutAnimation: false })
       }
     }
   },
@@ -16,7 +16,11 @@ export default {
     window.addEventListener('resize', this.resizeHandler)
   },
   mounted () {
-    // const isMobile = this.isMobile()
+    const isMobile = this.isMobile()
+    if(isMobile){
+      store.dispatch('ToggleDevice', 'mobile')
+      store.dispatch('CloseSideBar', { withoutAnimation: true })
+    }
   },
   methods: {
     isMobile () {

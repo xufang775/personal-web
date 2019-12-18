@@ -1,14 +1,29 @@
 <template>
-  <div class="dashboard-container">
-    <div class="dashboard-text">name:{{ name }}</div>
-    <div class="dashboard-text">roles:<span v-for="role in roles" :key="role">{{ role }}</span></div>
+  <div>
+    <b-cost-record-month></b-cost-record-month>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import { MyTable } from '@/components/Table'
+import MyRow  from '@/components/Table/MyRow'
+import MyTd from "@/components/Table/MyTd";
+import MonthCostRecordNew from "./month-cost-record-new";
+import { bCostRecordMonth,bCostRecordMonth2 } from "@/views/cost-manage/a-import"
+// import aa from '@/components/Table/MyTd'
+// import MyTd from "../../components/Table/MyTd";
 export default {
   name: 'Dashboard',
+  components:{
+    MyTd,
+    MyTable,
+    MyRow,
+    MonthCostRecordNew,
+    bCostRecordMonth,
+    bCostRecordMonth2
+    //monthCostRecordNew
+  },
   computed: {
     ...mapGetters([
       'name',

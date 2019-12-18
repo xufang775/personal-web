@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-/* Layout */
-import Layout from '../views/layout/Layout'
+
 // in development-env not use lazy-loading, because lazy-loading too many pages will cause webpack hot update too slow. so only in production use lazy-loading;
 // detail: https://panjiachen.github.io/vue-element-admin-site/#/lazy-loading
 
 Vue.use(Router)
+
+/* Layout */
+import Layout from '../views/layout/Layout'
 
 /**
  * hidden: true                   if `hidden:true` will not show in the sidebar(default is false)
@@ -30,7 +32,7 @@ export const constantRouterMap = [
     hidden: true,
     children: [{
       path: 'dashboard',
-      component: () => import('@/views/dashboard/index')
+      component: () => import('@/views/cost-manage/b-cost-record-month')
     }]
   },
   {
@@ -40,17 +42,71 @@ export const constantRouterMap = [
     name: 'cost',
     meta: { title: '消费管理', icon: 'example' },
     children: [
+      // {
+      //   path: 'item',
+      //   name: 'item',
+      //   component: () => import('@/views/cost-manage/cost-item/b-cost-item'),
+      //   meta: { title: '消费项目', icon: 'table' }
+      // },
       {
-        path: 'item',
-        name: 'item',
-        component: () => import('@/views/cost-manage/CostItemList'),
+        path: 'type',
+        name: 'type',
+        component: () => import('@/views/cost-manage/cost-type/b-cost-type'),
         meta: { title: '消费项目', icon: 'table' }
       },
       {
         path: 'record',
         name: 'record',
-        component: () => import('@/views/cost-manage/cost-record/index'),
+        component: () => import('@/views/cost-manage/cost-record/b-cost-record'),
         meta: { title: '消费记录', icon: 'tree' }
+      },
+      {
+        path: 'record-edit',
+        name: 'record-edit',
+        component: () => import('@/views/cost-manage/cost-record/b-cost-record-more'),
+        meta: { title: '消费记录-新增', icon: 'tree' }
+      },
+      {
+        path: 'record-table',
+        name: 'record-table',
+        component: () => import('@/views/cost-manage/cost-record/b-cost-record-table'),
+        meta: { title: '消费记录-表格', icon: 'tree' }
+      },
+      {
+        path: 'record-date',
+        name: 'record-date',
+        component: () => import('@/views/cost-manage/b-cost-record-date'),
+        meta: { title: '消费记录-日', icon: 'tree' }
+      },
+      {
+        path: 'record-month',
+        name: 'record-month',
+        component: () => import('@/views/cost-manage/b-cost-record-month'),
+        meta: { title: '消费记录-月', icon: 'tree' }
+      },
+      {
+        path: 'record-year',
+        name: 'record-year',
+        component: () => import('@/views/cost-manage/b-cost-record-year'),
+        meta: { title: '消费记录-年', icon: 'tree' }
+      },
+      // {
+      //   path: 'record-month1',
+      //   name: 'record-month1',
+      //   component: () => import('@/views/cost-manage/b-cost-record-month1'),
+      //   meta: { title: '消费记录-日历1', icon: 'tree' }
+      // },
+      // {
+      //   path: 'record-month2',
+      //   name: 'record-month2',
+      //   component: () => import('@/views/cost-manage/b-cost-record-month2'),
+      //   meta: { title: '消费记录-日历2', icon: 'tree' }
+      // },
+      {
+        path: 'record-census',
+        name: 'record-census',
+        component: () => import('@/views/cost-manage/b-cost-record-census'),
+        meta: { title: '消费记录统计', icon: 'tree' }
       }
     ]
   },
@@ -64,13 +120,13 @@ export const constantRouterMap = [
       {
         path: 'user',
         name: 'user',
-        component: () => import('@/views/system-manage/SysUserList'),
+        component: () => import('@/views/system-manage/b-sys-user'),
         meta: { title: '用户管理', icon: 'table' }
       },
       {
         path: 'role',
         name: 'role',
-        component: () => import('@/views/system-manage/SysRoleList'),
+        component: () => import('@/views/system-manage/sys-role'),
         meta: { title: '角色管理', icon: 'table' }
       }
     ]
@@ -179,7 +235,8 @@ export const constantRouterMap = [
       {
         path: 'menu2',
         component: () => import('@/views/nested/menu2/index'),
-        meta: { title: 'menu2' }
+        meta: { title: 'menu2' },
+
       }
     ]
   },

@@ -5,12 +5,12 @@ import 'nprogress/nprogress.css'// Progress 进度条样式
 import { Message } from 'element-ui'
 import { getToken } from '@/utils/auth' // 验权
 
-const whiteList = ['/login'] // 不重定向白名单
+const whiteList = ['/login']; // 不重定向白名单
 router.beforeEach((to, from, next) => {
-  NProgress.start()
+  NProgress.start();
   if (getToken()) {
     if (to.path === '/login') {
-      next({ path: '/' })
+      next({ path: '/' });
       NProgress.done()
     } else {
       if (store.getters.roles.length === 0) {
@@ -18,7 +18,7 @@ router.beforeEach((to, from, next) => {
           next()
         }).catch((err) => {
           store.dispatch('FedLogOut').then(() => {
-            Message.error(err || 'Verification failed, please login again')
+            Message.error(err || 'Verification failed, please login again');
             next({ path: '/' })
           })
         })
@@ -30,12 +30,12 @@ router.beforeEach((to, from, next) => {
     if (whiteList.indexOf(to.path) !== -1) {
       next()
     } else {
-      next('/login')
+      next('/login');
       NProgress.done()
     }
   }
-})
+});
 
 router.afterEach(() => {
   NProgress.done() // 结束Progress
-})
+});

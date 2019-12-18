@@ -8,8 +8,10 @@ const service = axios.create({
   // baseURL: process.env.BASE_API, // api的base_url
   // baseURL: 'http://localhost:1113/api-cost', // process.env.BASE_API_DEV, // api的base_url
   // baseURL: 'http://localhost:1141',
+  // baseURL: 'http://localhost:2008',
   baseURL: 'http://localhost:1007',
-  timeout: 5000 // 请求超时时间
+  // baseURL: 'http://192.168.1.184:1007',
+  timeout: 10000 // 请求超时时间
 })
 
 // 请求拦截器
