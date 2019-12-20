@@ -9,14 +9,18 @@ const service = axios.create({
   // baseURL: 'http://localhost:1113/api-cost', // process.env.BASE_API_DEV, // api的base_url
   // baseURL: 'http://localhost:1141',
   // baseURL: 'http://localhost:2008',
-  baseURL: 'http://localhost:1007',
+  // baseURL: 'http://localhost:1007',
+  baseURL: 'http://localhost:9527/api',
   // baseURL: 'http://192.168.1.184:1007',
-  timeout: 10000 // 请求超时时间
+  timeout: 50000 // 请求超时时间
 })
 
 // 请求拦截器
 service.interceptors.request.use(
   config => {
+    config.headers = {
+      'Content-Type': 'application/json'
+    };
     if (store.getters.token) {
       config.headers['Token'] = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
     }

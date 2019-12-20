@@ -2,7 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import 'normalize.css/normalize.css'
-import ElementUI from 'element-ui'
+import ElementUI,{ Message } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 import '@/styles/index.scss' // global css
@@ -36,6 +36,7 @@ Object.keys(filters).forEach(key => {
 })
 
 Vue.prototype.BASE = base;
+Vue.prototype.$msg = Message;
 
 Vue.component('aa',{
   template:`<div>123123</div>`

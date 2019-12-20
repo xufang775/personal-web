@@ -2,6 +2,7 @@ import request from '@/utils/request'
 const urlBase = '/api-system/sysRole';
 const url = {
   page: urlBase + '/getPageList',
+  all: urlBase + '/queryAll',
   save: urlBase + '/save',
   delete: urlBase + '/delete',
   update: urlBase + '/update'

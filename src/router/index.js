@@ -32,7 +32,8 @@ export const constantRouterMap = [
     hidden: true,
     children: [{
       path: 'dashboard',
-      component: () => import('@/views/cost-manage/b-cost-record-month')
+      // component: () => import('@/views/cost-manage/b-cost-record-month')
+      component: () => import('@/views/dashboard/')
     }]
   },
   {

@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <b-cost-record-month></b-cost-record-month>
+  <div class="app-container">
+    333
+    <!--<b-cost-record-month></b-cost-record-month>-->
   </div>
 </template>
 
@@ -16,12 +17,12 @@ import { bCostRecordMonth,bCostRecordMonth2 } from "@/views/cost-manage/a-import
 export default {
   name: 'Dashboard',
   components:{
-    MyTd,
-    MyTable,
-    MyRow,
-    MonthCostRecordNew,
-    bCostRecordMonth,
-    bCostRecordMonth2
+    // MyTd,
+    // MyTable,
+    // MyRow,
+    // MonthCostRecordNew,
+    // bCostRecordMonth,
+    // bCostRecordMonth2
     //monthCostRecordNew
   },
   computed: {

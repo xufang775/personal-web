@@ -105,7 +105,6 @@
           return sums;
         },
         tableRowClassName({row, rowIndex}) {
-          debugger;
           if(row.isToday){
             return 'success-row';
           }

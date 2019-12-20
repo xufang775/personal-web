@@ -1,33 +1,30 @@
-import request1 from '@/utils/request'
-import url from './url'
+import request from '@/utils/request'
+const urlBase = '/api-login';
+const url = {
+  login: urlBase + '/login',
+  // info: urlBase + '/user/info',
+  info: urlBase + '/info',
+  logout: urlBase + '/logout',
+};
 
 export function login (username, password) {
-  return request1.post(url.login.login, {
+  return request.post(url.login, {
     data: {
       username,
       password
     }
   })
-
-  // return request1({
-  //   url: '/user/login',
-  //   method: 'post',
-  //   data: {
-  //     username,
-  //     password
-  //   }
-  // })
 }
 export function getInfo (token) {
-  return request1({
-    url: url.login.info,
+  return request({
+    url: url.info,
     method: 'get',
     params: { token }
   })
 }
 export function logout () {
-  return request1({
-    url: url.login.logout,
+  return request({
+    url: url.logout,
     method: 'get'
   })
 }
