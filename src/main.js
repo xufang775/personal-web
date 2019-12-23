@@ -38,6 +38,12 @@ Object.keys(filters).forEach(key => {
 Vue.prototype.BASE = base;
 Vue.prototype.$msg = Message;
 
+Vue.prototype.BaseList = {
+  data(){
+    name:'123123'
+  }
+};
+
 Vue.component('aa',{
   template:`<div>123123</div>`
 });

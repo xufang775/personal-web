@@ -55,10 +55,16 @@ export const constantRouterMap = [
         component: () => import('@/views/cost-manage/cost-type/b-cost-type'),
         meta: { title: '消费项目', icon: 'table' }
       },
+      // {
+      //   path: 'record',
+      //   name: 'record',
+      //   component: () => import('@/views/cost-manage/cost-record/b-cost-record'),
+      //   meta: { title: '消费记录', icon: 'tree' }
+      // },
       {
         path: 'record',
         name: 'record',
-        component: () => import('@/views/cost-manage/cost-record/b-cost-record'),
+        component: () => import('@/views/cost-manage/cost-record-new'),
         meta: { title: '消费记录', icon: 'tree' }
       },
       {
