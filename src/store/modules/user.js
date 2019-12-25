@@ -6,7 +6,9 @@ const user = {
     token: getToken(),
     name: '',
     avatar: '',
-    roles: []
+    roles: [],
+    userId:'',
+    loginInfo:{},
   },
   getters: {
     aa (state) {
@@ -25,7 +27,13 @@ const user = {
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles
-    }
+    },
+    SET_USERID: (state, userid) => {
+      state.userId = userid
+    },
+    SET_LOGININFO: (state, loginInfo)=>{
+      state.info = loginInfo;
+    },
   },
   actions: {
     // 登录
@@ -34,11 +42,13 @@ const user = {
       return new Promise((resolve, reject) => {
         login(username, userInfo.password)
           .then(response => {
+            debugger;
             console.log(response);
             // const token = response.data.token;
             const token = response.message;
             setToken(token)
-            commit('SET_TOKEN', token)
+            commit('SET_TOKEN', token);
+            commit('SET_USERID', response.data.userId);
             resolve()
           })
       })
@@ -55,7 +65,11 @@ const user = {
               reject('getInfo: roles must be a non-null array !')
             }
             commit('SET_NAME', data.name)
-            commit('SET_AVATAR', data.avatar)
+            commit('SET_AVATAR', data.avatar);
+            commit('SET_LOGININFO',{
+              username: data.username,
+              userId: data.id
+            });
             resolve(response)
           })
           .catch(error => {

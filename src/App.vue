@@ -14,3 +14,9 @@ export default {
   }
 }
 </script>
+<style>
+  .float-r{ float: right;}
+  .font-b{font-weight: bold;}
+  .red{color: red;}
+  .margin-l10{margin-left: 10px;}
+</style>

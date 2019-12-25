@@ -1,9 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
-// in development-env not use lazy-loading, because lazy-loading too many pages will cause webpack hot update too slow. so only in production use lazy-loading;
-// detail: https://panjiachen.github.io/vue-element-admin-site/#/lazy-loading
-
 Vue.use(Router)
 
 /* Layout */
@@ -49,18 +45,24 @@ export const constantRouterMap = [
       //   component: () => import('@/views/cost-manage/cost-item/b-cost-item'),
       //   meta: { title: '消费项目', icon: 'table' }
       // },
-      {
-        path: 'type',
-        name: 'type',
-        component: () => import('@/views/cost-manage/cost-type/b-cost-type'),
-        meta: { title: '消费项目', icon: 'table' }
-      },
+      // {
+      //   path: 'type',
+      //   name: 'type',
+      //   component: () => import('@/views/cost-manage/cost-type/b-cost-type'),
+      //   meta: { title: '消费项目', icon: 'table' }
+      // },
       // {
       //   path: 'record',
       //   name: 'record',
       //   component: () => import('@/views/cost-manage/cost-record/b-cost-record'),
       //   meta: { title: '消费记录', icon: 'tree' }
       // },
+      {
+        path: 'type',
+        name: 'type',
+        component: () => import('@/views/cost-manage/cost-type'),
+        meta: { title: '消费类型', icon: 'tree' }
+      },
       {
         path: 'record',
         name: 'record',
