@@ -53,7 +53,11 @@ export const BaseList = {
     handleRefresh(){
       this.params = { ... this.paramsDefault };
       this.loadList();
-    }
+    },
+    handleEdit(data){
+      console.log('edit')
+      console.log(data)
+    },
   }
 };
 
@@ -103,6 +107,8 @@ export const BaseForm = {
       show: false,
       labelWidth: '180px',
       model: {},
+      formName:'',
+      api:{}
     }
   },
   methods:{
@@ -112,7 +118,26 @@ export const BaseForm = {
     hideForm(){
       this.show = false;
     },
-    submitForm(){
+    resetForm(formName = 'form'){
+      this.$refs[this.formName].resetFields();
+    },
+    async submitForm(formName){
+      let valid = await this.$refs[formName].validate();
+      if(valid){
+        let postFn = this.model.id ? this.api.update : this.api.insert;
+        let result =await postFn(this.model);
+        if(result.code === 20000){
+          this.resetForm();
+          this.hideForm();
+          this.loadList();
+          this.$message({
+            message: '操作成功！',
+            type: 'success'
+          })
+        } else {
+          this.$message.error('操作失败！');
+        }
+      }
       console.log(this.model)
     }
   }

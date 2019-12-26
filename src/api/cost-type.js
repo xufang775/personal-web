@@ -3,9 +3,9 @@ const urlBase = '/api-money/costType';
 const url = {
   page: urlBase + '/page',
   all: urlBase + '/all',
-  save: urlBase + '/save',
-  delete: urlBase + '/delete',
+  insert: urlBase + '/insert',
   update: urlBase + '/update',
+  delete: urlBase + '/delete',
   cascader: urlBase + '/cascader'
 };
 const fns = {};

@@ -44,7 +44,7 @@
         </el-pagination>
     </div>
     <el-dialog :visible.sync="show">
-        <el-form  ref="form" :model="model" label-position="right" :label-width="labelWidth" >
+        <el-form  :ref="formName" :model="model" :rules="rules" label-position="right" :label-width="labelWidth" >
           <el-form-item label="是否顶级类型" prop="isTop">
             <el-switch
               v-model="model.isTop">
@@ -76,11 +76,15 @@
           <el-form-item label="备注" prop="remark">
               <el-input type="textarea" :autosize="{ minRows:2,maxRows:4 }" v-model="model.remark"></el-input>
           </el-form-item>
-
+          <el-form-item label="是否启用" prop="enabled">
+            <el-switch
+              v-model="model.enabled">
+            </el-switch>
+          </el-form-item>
         </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="hideForm">取消</el-button>
-        <el-button type="primary" @click="submitForm">确定</el-button>
+        <el-button type="primary" @click="submitForm('form')">确定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -101,8 +105,17 @@
             isTop: false,
             parentCode:'',
             name:'',
-            remark:''
-          }
+            remark:'',
+            enabled:true,
+            deleteFlag:false,
+            addUserId:this.$store.state.user.userId,
+            addUserName: this.$store.state.user.username,
+            // addDate:
+          },
+          rules:{
+            name:[{ required: true, message: '类型名称不能为空'}],
+          },
+          formName:'form'
         }
       },
       async created(){
@@ -117,13 +130,17 @@
           console.log('add')
           this.show = true;
         },
-        handleEdit(data){
+        handleEdit({$index,column,row}){
           console.log('edit')
-          console.log(data)
+          this.model = row;
+          this.model.enabled =
+          console.log(this.model.enabled)
+          this.show = true;
+          // console.log(data)
         },
-        handleDelete(data){
+        handleDelete({$index,column,row}){
           console.log('delete')
-          console.log(data)
+          // console.log(data)
         },
         handleDeleteOne(data){
           console.log('delete-one')

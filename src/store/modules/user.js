@@ -49,6 +49,7 @@ const user = {
             setToken(token)
             commit('SET_TOKEN', token);
             commit('SET_USERID', response.data.userId);
+            commit('SET_NAME', response.data.username);
             resolve()
           })
       })
