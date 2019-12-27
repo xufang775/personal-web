@@ -54,6 +54,31 @@ export const BaseList = {
       this.params = { ... this.paramsDefault };
       this.loadList();
     },
+    handleAdd(){
+      this.show = true;
+    },
+    handleDelete({$index,column,row}){
+      console.log('delete')
+      this.$alert();
+      // console.log(data)
+    },
+    handleDeleteOne({$index,column,row}){
+      let id = row.id;
+      this.$deleteConfirm(id,()=>{
+         this.api.delete({id:id}).then(res=>{
+           if(res.code === this.$HttpCode.c20000){
+             this.loadList();
+             this.$message({
+               message:'操作成功！',
+               type:'success'
+             });
+           } else {
+             this.$message.error('操作失败！');
+           }
+           // console.log(res)
+         });
+      });
+    },
     handleEdit(data){
       console.log('edit')
       console.log(data)
@@ -122,11 +147,12 @@ export const BaseForm = {
       this.$refs[this.formName].resetFields();
     },
     async submitForm(formName){
+      console.log(this.$refs[formName]);
       let valid = await this.$refs[formName].validate();
       if(valid){
         let postFn = this.model.id ? this.api.update : this.api.insert;
         let result =await postFn(this.model);
-        if(result.code === 20000){
+        if(result.code === this.$HttpCode.c20000){
           this.resetForm();
           this.hideForm();
           this.loadList();

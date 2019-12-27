@@ -43,6 +43,7 @@
                        :total="total">
         </el-pagination>
     </div>
+    <test></test>
     <el-dialog :visible.sync="show">
         <el-form  :ref="formName" :model="model" :rules="rules" label-position="right" :label-width="labelWidth" >
           <el-form-item label="是否顶级类型" prop="isTop">
@@ -77,9 +78,7 @@
               <el-input type="textarea" :autosize="{ minRows:2,maxRows:4 }" v-model="model.remark"></el-input>
           </el-form-item>
           <el-form-item label="是否启用" prop="enabled">
-            <el-switch
-              v-model="model.enabled">
-            </el-switch>
+            <el-switch v-model="model.enabled"></el-switch>
           </el-form-item>
         </el-form>
       <div slot="footer" class="dialog-footer">
@@ -91,6 +90,7 @@
 </template>
 
 <script>
+  import Vue from 'vue'
   import { BaseList, BaseSearch, BaseForm } from '@/utils/base-comp';
   import api from '@/api/cost-type';
     export default {
@@ -119,33 +119,36 @@
         }
       },
       async created(){
+        console.log(Vue.$myName);
+        Vue.myGlobalMethod();
+        this.$myMethod();
         // console.log('sub created');
        let userId = this.$store.state.user.userId;
        let result = await api.cascader({ userId: userId});
        this.dic.parentCode = result.data;
+       this.sayHello();
        // console.log(result);
       },
       methods:{
-        handleAdd(){
-          console.log('add')
-          this.show = true;
+        getParentCode(code){
+          let ret = [];
+          for(let i=0; i<code.length; i++){
+            if( (i+1) % 2 == 0 && i != 0 ){
+              ret.push(code.substr(0,i+1))
+            }
+          }
+          return ret;
         },
         handleEdit({$index,column,row}){
-          console.log('edit')
           this.model = row;
-          this.model.enabled =
-          console.log(this.model.enabled)
+          this.model.parentCode = this.getParentCode(this.model.code);
+          this.model.isTop = this.convartIntToBoolean(row.isTop);  // row.isTop == '1' ? true : false;
+          this.model.enabled = this.convartIntToBoolean(row.enabled); // row.enabled == '1' ? true : false;
+          delete this.model.addDate;
+          delete this.model.deleteFlag;
           this.show = true;
-          // console.log(data)
         },
-        handleDelete({$index,column,row}){
-          console.log('delete')
-          // console.log(data)
-        },
-        handleDeleteOne(data){
-          console.log('delete-one')
-          console.log(data)
-        }
+
       }
     }
 </script>

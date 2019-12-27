@@ -11,6 +11,8 @@ import App from './App'
 import router from './router'
 import store from './store'
 import * as Tools from './utils/tools'
+import MyPlugin from './plugins/plugins'
+Vue.use(MyPlugin)
 
 import i18n from './lang' // Internationalization
 import '@/icons' // icon
