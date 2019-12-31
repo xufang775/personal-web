@@ -70,6 +70,12 @@ export const constantRouterMap = [
         meta: { title: '消费记录', icon: 'tree' }
       },
       {
+        path: 'record-table2',
+        name: 'record-table2',
+        component: () => import('@/views/cost-manage/cost-record-new/index-table'),
+        meta: { title: '消费记录-表格2', icon: 'tree' }
+      },
+      {
         path: 'record-edit',
         name: 'record-edit',
         component: () => import('@/views/cost-manage/cost-record/b-cost-record-more'),
@@ -81,6 +87,7 @@ export const constantRouterMap = [
         component: () => import('@/views/cost-manage/cost-record/b-cost-record-table'),
         meta: { title: '消费记录-表格', icon: 'tree' }
       },
+
       {
         path: 'record-date',
         name: 'record-date',

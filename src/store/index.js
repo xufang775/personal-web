@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import app from './modules/app'
 import user from './modules/user'
+import costRecord from './modules/costRecord'
 import moduleA from './modules/moduleA'
 import getters from './getters'
 
@@ -63,7 +64,8 @@ const store = new Vuex.Store({
   modules: {
     moduleA,
     app,
-    user
+    user,
+    costRecord
   },
   getters
 });

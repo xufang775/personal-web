@@ -5,7 +5,8 @@ const url = {
   all: urlBase + '/all',
   save: urlBase + '/save',
   delete: urlBase + '/delete',
-  update: urlBase + '/update'
+  update: urlBase + '/update',
+  queryTable: urlBase + '/queryTable',
 };
 const fns = {};
 Object.keys(url).forEach(key =>{

@@ -1,3 +1,17 @@
+export const DateType = {
+  date:'date',
+  time:'time',
+  week:'week',
+  weekFirst:'weekFirst',
+  weekLast:'weekLast',
+  month:'month',
+  monthFirst:'monthFirst',
+  monthLast:'monthLast',
+  year:'year',
+  yearFirst:'yearFirst',
+  yearLast:'yearLast',
+};
+
 // 定义常量
 export default {
   install(Vue,options){
@@ -10,6 +24,7 @@ export default {
       c50014: 50014
     };
 
+    Vue.prototype.$datetype = DateType;
 
   }
 }

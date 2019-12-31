@@ -1,6 +1,7 @@
 import Alert from './alert'
 import Constant from './constant'
 import Fn from './common-fn'
+import DateHelper from './date-helper'
 
 export default {
   install(Vue,options){
@@ -32,9 +33,14 @@ export default {
       console.log('实例方法')
     }
 
+    Vue.prototype.$toUpperCase = function (str) {
+      return str.replace(str[0],str[0].toUpperCase());
+    }
+
     Vue.use(Alert);
     Vue.use(Constant);
     Vue.use(Fn);
+    Vue.use(DateHelper);
 
   }
 }

@@ -5,6 +5,8 @@ const getters = {
   avatar: state => state.user.avatar,
   name: state => state.user.name,
   roles: state => state.user.roles,
+  crSearchType: state => state.costRecord.searchDateType,
+  crCurrDate: state => state.costRecord.currentDate,
   doneTodos: state => {
     return state.todos.filter(todo => todo.done)
   },

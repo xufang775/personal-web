@@ -5,7 +5,7 @@ export const BaseList = {
     return {
       list:[],
       pager:{
-        pageIndex:0,
+        pageIndex:1,
         pageSize:10,
         pageSizes:[10,15,20,30]
       },
